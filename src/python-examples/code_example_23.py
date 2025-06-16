@@ -1,0 +1,1 @@
+def safe_joke():\n    try:\n        r = requests.get("https://icanhazdadjoke.com/", headers={"Accept": "application/json"})\n        if r.status_code == 200:\n            return r.json()["joke"]\n        return "API returned an error."\n    except requests.exceptions.RequestException:\n        return "Network error. Try again later."

@@ -1,0 +1,1 @@
+pizza_answer = input("Do you like pizza? (yes/no/maybe) ")\nif pizza_answer == "yes":\n    print("Pizza is amazing! What's your favorite topping?")\nelif pizza_answer == "maybe":\n    print("It's hard to decide! Maybe try a new flavor.")\nelse:\n    print("That's okay, everyone has different tastes!")
