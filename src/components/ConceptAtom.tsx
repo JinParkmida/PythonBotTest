@@ -1578,3 +1578,118 @@ class StudyBuddyBot:
         """Display all available commands"""
         help_text = f"""
 📚 {self.name} - Your Study Companion Commands:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+start [minutes]  - Begin a focused study timer
+note [text]      - Save a quick study note
+notes            - Review your saved notes
+goal [text]      - Add a new study goal
+goals            - View your current goals
+overview         - Show today's study summary
+help             - Show this help message
+quit             - Exit the bot
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        """
+        print(help_text)
+
+    def start_timer(self, minutes: int):
+        """Start a study timer and log the session"""
+        try:
+            mins = int(minutes)
+            if mins <= 0:
+                print("Please specify a positive number of minutes.")
+                return
+            end_time = datetime.now() + timedelta(minutes=mins)
+            print(f"⏰ Timer set for {mins} minutes. Ends at {end_time.strftime('%H:%M')}")
+            time.sleep(1)  # Simulate timer
+            self.study_sessions.append({'date': datetime.now().strftime('%Y-%m-%d'), 'duration': mins})
+            print("✅ Time's up! Great job studying!")
+        except ValueError:
+            print("Invalid number of minutes.")
+
+    def add_note(self, text: str):
+        """Save a study note"""
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
+        self.notes.append({'text': text, 'timestamp': timestamp})
+        print("Note saved.")
+
+    def show_notes(self):
+        """Display all notes"""
+        if not self.notes:
+            print("No notes yet.")
+            return
+        print("\n📒 Your Notes:")
+        for i, n in enumerate(self.notes, 1):
+            print(f"{i}. {n['text']} ({n['timestamp']})")
+
+    def add_goal(self, text: str):
+        """Add a new study goal"""
+        self.goals.append({'text': text, 'completed': False})
+        print("Goal added.")
+
+    def show_goals(self):
+        """Show current goals"""
+        if not self.goals:
+            print("No goals set.")
+            return
+        print("\n🎯 Your Goals:")
+        for i, g in enumerate(self.goals, 1):
+            status = '✓' if g.get('completed') else '✗'
+            print(f"{i}. [{status}] {g['text']}")
+
+    def process_command(self, user_input: str):
+        """Process a command from the user"""
+        if not user_input:
+            return
+        parts = user_input.split(maxsplit=1)
+        cmd = parts[0].lower()
+        arg = parts[1] if len(parts) > 1 else ''
+        if cmd in ('quit', 'exit'):
+            return 'quit'
+        if cmd == 'help':
+            self.show_help()
+        elif cmd == 'start':
+            self.start_timer(arg or 0)
+        elif cmd == 'note':
+            if arg:
+                self.add_note(arg)
+            else:
+                print('Provide text for the note.')
+        elif cmd == 'notes':
+            self.show_notes()
+        elif cmd == 'goal':
+            if arg:
+                self.add_goal(arg)
+            else:
+                print('Provide a goal description.')
+        elif cmd == 'goals':
+            self.show_goals()
+        elif cmd == 'overview':
+            self.show_daily_overview()
+        else:
+            print("I didn't understand that command. Type 'help' for options.")
+
+    def run(self):
+        """Main interaction loop"""
+        self.greet_user()
+        self.show_help()
+        while True:
+            try:
+                user_input = input(f"\n{self.user_name}: ").strip()
+                result = self.process_command(user_input)
+                if result == 'quit':
+                    print(f"\nGoodbye, {self.user_name}! Keep up the great work!")
+                    break
+            except KeyboardInterrupt:
+                print("\nSession ended. Goodbye!")
+                break
+
+if __name__ == '__main__':
+    bot = StudyBuddyBot()
+    bot.run()`
+          }
+        ]
+      }
+    },
+    tags: ['integration', 'planning', 'api-usage', 'personalization', 'productivity']
+  }
+];
