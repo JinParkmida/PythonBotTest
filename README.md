@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![PyFlow Logo](https://via.placeholder.com/200x80/4F46E5/FFFFFF?text=PyFlow)
+![PyFlow Logo](https://www.python.org/static/community_logos/python-logo.png)
 
 **Learn Python through interactive bot development**
 
@@ -74,7 +74,7 @@ Each learning unit is a self-contained "concept atom" that covers:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/pyflow.git
+   git clone https://github.com/pyflow/pyflow.git
    cd pyflow
    ```
 
@@ -229,9 +229,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: Check our [Wiki](https://github.com/your-username/pyflow/wiki)
-- **Issues**: Report bugs on [GitHub Issues](https://github.com/your-username/pyflow/issues)
-- **Discussions**: Join conversations in [GitHub Discussions](https://github.com/your-username/pyflow/discussions)
+- **Documentation**: Check our [Wiki](https://github.com/pyflow/pyflow/wiki)
+- **Issues**: Report bugs on [GitHub Issues](https://github.com/pyflow/pyflow/issues)
+- **Discussions**: Join conversations in [GitHub Discussions](https://github.com/pyflow/pyflow/discussions)
 - **Email**: Contact us at support@pyflow.dev
 
 ## 🗺️ Roadmap
@@ -255,8 +255,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Start your Python journey today with PyFlow!**
 
-[🚀 Get Started](http://localhost:5173) | [📚 Documentation](https://github.com/your-username/pyflow/wiki) | [💬 Community](https://github.com/your-username/pyflow/discussions)
+[🚀 Get Started](http://localhost:5173) | [📚 Documentation](https://github.com/pyflow/pyflow/wiki) | [💬 Community](https://github.com/pyflow/pyflow/discussions)
 
 Made with ❤️ by the PyFlow Team
 
 </div>
+
