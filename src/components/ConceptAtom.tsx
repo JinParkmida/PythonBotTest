@@ -15,7 +15,7 @@ export const conceptAtoms: ConceptAtomType[] = [
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `This first lesson prepares your environment so the rest of the course runs smoothly.
+            content: `This first lesson prepares your environment so the rest of the course runs smoothly. Every upcoming concept relies on this initial setup.
 
 **Step 1: Choose Your Development Environment**
 
@@ -37,6 +37,10 @@ If you see "Hello, Python!" in your terminal, everything is working.
 **Step 4: Experiment**
 
 Try changing the message inside the quotes and run it again. Notice how the output changes—your first interaction with Python!
+
+**Step 5: Preview What's Next**
+
+With your tools ready, you're prepared to learn about bots in the next concept. Keep this program handy—you'll expand on it soon.
 
 **Common Errors**
 - `'python' is not recognized` – install Python and check your PATH
@@ -106,7 +110,7 @@ print("Today's date: 2024-01-15")`,
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `Now that your environment is configured, let's look at what a bot actually is.
+            content: `Now that your environment is configured (from the previous concept), let's look at what a bot actually is.
 
 **Step 1: Define What a Bot Is**
 
@@ -134,6 +138,10 @@ Bots are used for:
 **Step 4: Plan Your Bot's Purpose**
 
 Before coding, decide what your bot will do. Will it provide information, entertain users, solve problems, or automate tasks?
+
+**Step 5: Connect to Your First Bot**
+
+With the basics of bots understood, you're ready to build one in the next concept. Remember the input-process-output model as you start coding.
 
 **Common Errors**
 - Not handling unexpected input
@@ -188,7 +196,7 @@ print(greeting)  # Send greeting back`
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `Building on the previous lesson, let's code a real bot.
+            content: `Building on the previous lesson where you learned what a bot is, let's code a real one.
 
 **Step 1: Create a Simple Output Bot**
 
@@ -226,6 +234,10 @@ else:
 **Step 4: Combine Everything**
 
 Put all the pieces together into a complete program that demonstrates input, processing, and output.
+
+**Step 5: Prepare for Variables**
+
+The next concept introduces variables. Keep track of the information your bot collects so you can store it in variables soon.
 
 **Common Errors**
 - Forgetting to convert user input types
@@ -305,7 +317,7 @@ print("Thanks for sharing your favorite color with me!")`,
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `Your bot now collects input; let's store that information.
+            content: `Your bot now collects input from the previous lesson; let's store that information.
 
 **Step 1: Understand Variables as Storage**
 
@@ -333,6 +345,10 @@ Create variables and observe how they store different types of data.
 **Step 4: Modify Variables**
 
 Variables can be updated with new values throughout your program.
+
+**Step 5: Preview Conditional Logic**
+
+You'll soon use variables inside conditional statements. Make sure you understand how to update them so your decisions reflect the latest data.
 
 **Common Errors**
 - Mixing string and number types without conversion
@@ -491,6 +507,10 @@ else:
 **Step 4: Build Complex Decision Trees**
 
 Create sophisticated logic that handles multiple scenarios and edge cases.
+
+**Step 5: Transition to Loops**
+
+Complex decisions often repeat. In the next concept you'll combine these conditionals with loops to handle ongoing tasks.
 
 **Common Errors**
 - Misplacing colons or indentation in if/elif blocks
@@ -715,8 +735,12 @@ for i in range(10):
         continue  # Skip this iteration
     if i == 7:
         break     # Exit the loop
-    print(i)
+print(i)
 \`\`\`
+
+**Step 5: Looking Ahead to APIs**
+
+Loops let your bot perform tasks repeatedly. In the next lesson you'll use them to fetch data from APIs over and over.
 
 **Common Errors**
 - Forgetting to update loop variables (infinite loops)
@@ -906,7 +930,9 @@ print("\\nRemember: Never share your password with anyone!")`,
             title: 'What Are APIs?',
             content: `Now that loops let your bot run repeatedly, let's pull in external data.
 
-**API stands for Application Programming Interface**
+**Step 1: Understand the Term API**
+
+API stands for Application Programming Interface
 
 Think of an API as a waiter in a restaurant:
 • You (your program) make a request
@@ -914,15 +940,19 @@ Think of an API as a waiter in a restaurant:
 • The kitchen (service) prepares your order (processes the request)
 • The waiter brings back your food (returns the data)
 
-**Common API Types:**
+**Step 2: Explore Common API Types**
 • **Weather APIs**: Get current weather and forecasts
 • **News APIs**: Fetch latest news articles
 • **Social Media APIs**: Access posts and user data
 • **Financial APIs**: Get stock prices and market data
 • **Entertainment APIs**: Movies, music, games information
 
-**Why Use APIs?**
+**Step 3: Why Use APIs?**
 Instead of building everything from scratch, APIs let you access existing services and data. Want weather information? Use a weather API. Need jokes? Use a joke API.
+
+**Step 4: Get Ready to Call One**
+
+You'll implement actual HTTP requests in the next concept, so keep these examples in mind.
 
 **Common Errors**
 - Forgetting to check API status codes
@@ -952,14 +982,14 @@ fake_news_response = {
 
 # Demonstrating how you'd use API data
 print("Weather Information:")  # Display weather
-print(f"Location: {fake_weather_response['location']}")
-print(f"Temperature: {fake_weather_response['temperature']}°F")
-print(f"Condition: {fake_weather_response['condition']}")
+print(f"Location: {fake_weather_response['location']}")  # City from API
+print(f"Temperature: {fake_weather_response['temperature']}°F")  # Show temp
+print(f"Condition: {fake_weather_response['condition']}")  # Weather state
 
 print("\\nLatest News:")  # Loop through articles
 for article in fake_news_response['articles']:
-    print(f"Title: {article['title']}")
-    print(f"By: {article['author']}")
+    print(f"Title: {article['title']}")  # Article headline
+    print(f"By: {article['author']}")  # Who wrote it
 
 print("\\n=== This is how APIs provide structured data to your programs! ===")`
           },
@@ -1147,8 +1177,12 @@ try:
     return response.json()
 except requests.exceptions.RequestException as e:
     print(f"API call failed: {e}")
-    return None
+return None
 \`\`\`
+
+**Step 5: Move Toward a Full Bot**
+
+With reliable API calls in place, you're ready to merge all these skills when you create your personalized bot in the final concept.
 
 **Common Errors**
 - Missing internet connection
@@ -1400,6 +1434,10 @@ Make your bot memorable with:
 • Helpful error messages
 • Encouraging feedback
 • Personal touches that reflect your creativity
+
+**Step 5: Final Preparation**
+
+You're almost ready to release your bot. The next concept will walk you through final setup and deployment.
 
 **Common Errors**
 - Adding too many features at once
