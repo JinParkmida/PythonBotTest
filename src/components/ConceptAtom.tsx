@@ -1,416 +1,1580 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { 
-  Play, 
-  CheckCircle, 
-  Clock, 
-  Tag,
-  ChevronDown,
-  ChevronUp,
-  Lightbulb,
-  Code,
-  PlayCircle,
-  Copy,
-  Check,
-  Zap,
-  Heart,
-  Target
-} from 'lucide-react';
-import { ConceptAtomType, ContentModality, UserProfile } from '../types';
+import { ConceptAtomType } from '../types';
 
-interface ConceptAtomProps {
-  atom: ConceptAtomType;
-  modality: ContentModality;
-  userProfile: UserProfile;
-  isCompleted: boolean;
-  onComplete: () => void;
+export const conceptAtoms: ConceptAtomType[] = [
+  {
+    id: 'setup-playground',
+    title: 'Setting Up Your Development Environment',
+    description: 'Configure your Python environment and write your first program',
+    category: 'Setup',
+    difficulty: 'beginner',
+    prerequisites: [],
+    nextConcepts: ['what-is-a-bot'],
+    estimatedTime: 15,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Tutorial Steps',
+            content: `**Step 1: Choose Your Development Environment**
+
+You need a place to write and run Python code. You have several options:
+
+• **Online Editors**: Replit, CodePen, or Trinket (no installation required)
+• **Local Installation**: Install Python on your computer with an editor like VS Code
+• **IDEs**: PyCharm, Thonny, or IDLE (comes with Python)
+
+**Step 2: Test Your Setup**
+
+Once you have Python available, test it by running this simple program.
+
+**Step 3: Understand the Output**
+
+When you run this code, you should see "Hello, Python!" appear in your terminal or output window. This confirms Python is working correctly.
+
+**Step 4: Experiment**
+
+Try changing the message inside the quotes and run it again. Notice how the output changes - this is your first interaction with Python!`,
+            codeExample: `# Your first Python program
+print("Hello, Python!")
+
+# Try changing this message
+print("I'm learning to code!")
+
+# You can print multiple lines
+print("Line 1")
+print("Line 2")
+print("Line 3")`
+          },
+          {
+            title: 'Understanding Development Environments',
+            content: `A development environment is your workspace for writing code. It consists of:
+
+**Text Editor/IDE**: Where you write your code
+**Python Interpreter**: The program that runs your Python code
+**Terminal/Console**: Where you see output and run commands
+**File System**: Where your code files are stored
+
+**Key Concepts:**
+- **Source Code**: The human-readable instructions you write
+- **Execution**: When the computer runs your code
+- **Output**: What your program displays or produces
+- **Debugging**: Finding and fixing errors in your code`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Write a program that prints your name, your favorite programming language, and today\'s date on separate lines.',
+            solution: `print("My name is: John Doe")
+print("Favorite language: Python")
+print("Today's date: 2024-01-15")`,
+            hints: [
+              'Use three separate print() statements',
+              'Put your text inside quotes',
+              'Each print() creates a new line automatically'
+            ]
+          }
+        ]
+      }
+    },
+    tags: ['setup', 'environment', 'python-basics', 'syntax']
+  },
+  {
+    id: 'what-is-a-bot',
+    title: 'Understanding Bots and Automation',
+    description: 'Learn what bots are, how they work, and their role in modern software',
+    category: 'Concepts',
+    difficulty: 'beginner',
+    prerequisites: ['setup-playground'],
+    nextConcepts: ['bare-bones-bot'],
+    estimatedTime: 12,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Tutorial Steps',
+            content: `**Step 1: Define What a Bot Is**
+
+A bot is a program that automates tasks by following predefined rules. In our context, we're building conversational bots that:
+• Accept user input
+• Process that input according to programmed logic
+• Provide appropriate responses
+
+**Step 2: Understand the Input-Process-Output Model**
+
+Every bot follows this pattern:
+1. **Input**: Receive data (text, commands, signals)
+2. **Process**: Apply logic to determine the appropriate response
+3. **Output**: Return a result (text, actions, API calls)
+
+**Step 3: Identify Bot Applications**
+
+Bots are used for:
+• Customer service automation
+• Data processing and analysis
+• Social media management
+• Game automation
+• Personal assistants
+
+**Step 4: Plan Your Bot's Purpose**
+
+Before coding, decide what your bot will do. Will it provide information, entertain users, solve problems, or automate tasks?`,
+            codeExample: `# Simple bot demonstration
+# This shows the basic input-process-output pattern
+
+# Input: Get user's name
+user_name = input("What's your name? ")
+
+# Process: Create a personalized greeting
+greeting = f"Hello, {user_name}! Welcome to bot programming."
+
+# Output: Display the result
+print(greeting)`
+          },
+          {
+            title: 'Bot Architecture and Design Patterns',
+            content: `**State Management**: Bots often need to remember information across interactions. This requires:
+- Variable storage for temporary data
+- File systems or databases for persistent data
+- Session management for multi-turn conversations
+
+**Event-Driven Programming**: Bots respond to events:
+- User messages
+- Timer events
+- External API responses
+- System notifications
+
+**Modular Design**: Well-designed bots separate concerns:
+- Input handling
+- Business logic
+- Output formatting
+- External integrations`
+          }
+        ]
+      }
+    },
+    tags: ['concepts', 'automation', 'architecture', 'design-patterns']
+  },
+  {
+    id: 'bare-bones-bot',
+    title: 'Building Your First Interactive Bot',
+    description: 'Create a basic bot that can receive input, make decisions, and respond',
+    category: 'Implementation',
+    difficulty: 'beginner',
+    prerequisites: ['what-is-a-bot'],
+    nextConcepts: ['variables-memory'],
+    estimatedTime: 20,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Tutorial Steps',
+            content: `**Step 1: Create a Simple Output Bot**
+
+Start with a bot that just displays a message:
+
+\`\`\`python
+print("Hello! I am your first bot.")
+print("I'm here to help you learn programming.")
+\`\`\`
+
+**Step 2: Add User Input**
+
+Make your bot interactive by accepting user input:
+
+\`\`\`python
+user_name = input("What's your name? ")
+print(f"Nice to meet you, {user_name}!")
+\`\`\`
+
+**Step 3: Implement Basic Decision Making**
+
+Add conditional logic to make your bot respond differently:
+
+\`\`\`python
+mood = input("How are you feeling today? (good/bad) ")
+
+if mood == "good":
+    print("That's wonderful! I'm glad you're having a good day.")
+elif mood == "bad":
+    print("I'm sorry to hear that. I hope things improve soon.")
+else:
+    print("Thanks for sharing. Every day has its ups and downs.")
+\`\`\`
+
+**Step 4: Combine Everything**
+
+Put all the pieces together into a complete program that demonstrates input, processing, and output.`,
+            codeExample: `# Complete basic bot example
+print("=== Welcome to ChatBot v1.0 ===")
+print("I'm a simple bot that can have basic conversations.")
+
+# Get user information
+name = input("\\nWhat's your name? ")
+print(f"Hello, {name}! Nice to meet you.")
+
+# Ask about their day
+mood = input("How has your day been? (great/okay/rough) ")
+
+# Respond based on their input
+if mood.lower() == "great":
+    print("That's fantastic! I love hearing about good days.")
+    follow_up = input("What made it so great? ")
+    print(f"That sounds amazing, {name}!")
+elif mood.lower() == "okay":
+    print("Okay days are perfectly normal. Not every day can be extraordinary.")
+elif mood.lower() == "rough":
+    print("I'm sorry you've had a tough day. Tomorrow is a fresh start.")
+else:
+    print(f"Thanks for sharing, {name}. I appreciate your honesty.")
+
+print("\\nThanks for chatting with me! Have a wonderful rest of your day.")`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Create a bot that asks for the user\'s favorite color and responds with a compliment about that color. Include handling for at least 3 different colors.',
+            solution: `print("Color Compliment Bot")
+print("I love talking about colors!")
+
+color = input("What's your favorite color? ").lower()
+
+if color == "blue":
+    print("Blue is such a calming and peaceful color!")
+elif color == "red":
+    print("Red shows passion and energy - great choice!")
+elif color == "green":
+    print("Green represents nature and growth. Very refreshing!")
+elif color == "purple":
+    print("Purple is the color of creativity and royalty!")
+else:
+    print(f"{color.title()} is a beautiful color! You have great taste.")
+
+print("Thanks for sharing your favorite color with me!")`,
+            hints: [
+              'Use input() to get their favorite color',
+              'Convert to lowercase with .lower() for easier comparison',
+              'Use if/elif/else to handle different colors',
+              'Include a general response for colors you didn\'t specifically handle'
+            ]
+          }
+        ]
+      }
+    },
+    tags: ['input-output', 'conditionals', 'user-interaction', 'basic-logic']
+  },
+  {
+    id: 'variables-memory',
+    title: 'Variables and Data Management',
+    description: 'Master variables, data types, and how programs store and manipulate information',
+    category: 'Fundamentals',
+    difficulty: 'beginner',
+    prerequisites: ['bare-bones-bot'],
+    nextConcepts: ['making-choices'],
+    estimatedTime: 18,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Tutorial Steps',
+            content: `**Step 1: Understand Variables as Storage**
+
+Variables are named containers that store data. Think of them as labeled boxes:
+
+\`\`\`python
+user_name = "Alice"        # String variable
+user_age = 25             # Integer variable
+user_height = 5.6         # Float variable
+is_student = True         # Boolean variable
+\`\`\`
+
+**Step 2: Learn Data Types**
+
+Python has several built-in data types:
+• **Strings (str)**: Text data in quotes
+• **Integers (int)**: Whole numbers
+• **Floats (float)**: Decimal numbers
+• **Booleans (bool)**: True or False values
+
+**Step 3: Practice Variable Assignment**
+
+Create variables and observe how they store different types of data.
+
+**Step 4: Modify Variables**
+
+Variables can be updated with new values throughout your program.`,
+            codeExample: `# Comprehensive variable example
+print("=== User Profile Bot ===")
+
+# Collect user information
+name = input("Enter your name: ")
+age = int(input("Enter your age: "))
+height = float(input("Enter your height in feet: "))
+is_student = input("Are you a student? (yes/no): ").lower() == "yes"
+
+# Calculate derived information
+birth_year = 2024 - age
+height_cm = height * 30.48  # Convert feet to centimeters
+
+# Display profile
+print(f"\\n=== Profile for {name} ===")
+print(f"Age: {age} years old")
+print(f"Birth Year: {birth_year}")
+print(f"Height: {height} feet ({height_cm:.1f} cm)")
+print(f"Student Status: {'Student' if is_student else 'Not a student'}")
+
+# Demonstrate variable modification
+print(f"\\nNext year, {name} will be {age + 1} years old!")
+
+# Show data types
+print(f"\\n=== Data Types ===")
+print(f"name is a {type(name).__name__}")
+print(f"age is a {type(age).__name__}")
+print(f"height is a {type(height).__name__}")
+print(f"is_student is a {type(is_student).__name__}")`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Create a bot that calculates and displays someone\'s BMI (Body Mass Index). Ask for height in meters and weight in kilograms, then calculate BMI = weight / (height^2).',
+            solution: `print("BMI Calculator Bot")
+print("I'll help you calculate your Body Mass Index")
+
+# Get user input
+name = input("What's your name? ")
+weight = float(input("Enter your weight in kilograms: "))
+height = float(input("Enter your height in meters: "))
+
+# Calculate BMI
+bmi = weight / (height ** 2)
+
+# Determine BMI category
+if bmi < 18.5:
+    category = "Underweight"
+elif bmi < 25:
+    category = "Normal weight"
+elif bmi < 30:
+    category = "Overweight"
+else:
+    category = "Obese"
+
+# Display results
+print(f"\\n=== BMI Results for {name} ===")
+print(f"Weight: {weight} kg")
+print(f"Height: {height} m")
+print(f"BMI: {bmi:.2f}")
+print(f"Category: {category}")
+
+print("\\nNote: BMI is a general indicator. Consult healthcare professionals for personalized advice.")`,
+            hints: [
+              'Use float() to convert height and weight inputs to numbers',
+              'BMI formula: weight / (height^2) - use ** for exponentiation',
+              'Use :.2f in f-strings to round to 2 decimal places',
+              'Create categories based on standard BMI ranges'
+            ]
+          }
+        ]
+      }
+    },
+    tags: ['variables', 'data-types', 'memory', 'type-conversion']
+  },
+  {
+    id: 'making-choices',
+    title: 'Advanced Decision Making and Logic',
+    description: 'Master complex conditional logic, boolean operations, and decision trees',
+    category: 'Logic',
+    difficulty: 'beginner',
+    prerequisites: ['variables-memory'],
+    nextConcepts: ['loops-repetition'],
+    estimatedTime: 25,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Tutorial Steps',
+            content: `**Step 1: Master Multiple Conditions with elif**
+
+Use elif to check multiple conditions in sequence:
+
+\`\`\`python
+score = int(input("Enter your test score: "))
+
+if score >= 90:
+    grade = "A"
+    message = "Excellent work!"
+elif score >= 80:
+    grade = "B"
+    message = "Good job!"
+elif score >= 70:
+    grade = "C"
+    message = "Satisfactory"
+elif score >= 60:
+    grade = "D"
+    message = "Needs improvement"
+else:
+    grade = "F"
+    message = "Please study more"
+
+print(f"Grade: {grade} - {message}")
+\`\`\`
+
+**Step 2: Use Logical Operators**
+
+Combine conditions with and, or, and not:
+
+\`\`\`python
+age = int(input("Enter your age: "))
+has_license = input("Do you have a license? (yes/no): ").lower() == "yes"
+
+if age >= 18 and has_license:
+    print("You can drive!")
+elif age >= 18 and not has_license:
+    print("You're old enough but need a license.")
+else:
+    print("You're too young to drive.")
+\`\`\`
+
+**Step 3: Handle String Comparisons Properly**
+
+Make comparisons case-insensitive and handle variations:
+
+\`\`\`python
+answer = input("Do you want to continue? (yes/no): ").lower().strip()
+
+if answer in ["yes", "y", "yeah", "yep"]:
+    print("Great! Let's continue.")
+elif answer in ["no", "n", "nope", "nah"]:
+    print("Okay, stopping here.")
+else:
+    print("Please answer yes or no.")
+\`\`\`
+
+**Step 4: Build Complex Decision Trees**
+
+Create sophisticated logic that handles multiple scenarios and edge cases.`,
+            codeExample: `# Advanced restaurant recommendation bot
+print("=== Restaurant Recommendation Bot ===")
+
+# Gather preferences
+cuisine = input("What type of cuisine? (italian/chinese/mexican/american): ").lower()
+budget = input("What's your budget? (low/medium/high): ").lower()
+dietary = input("Any dietary restrictions? (none/vegetarian/vegan/gluten-free): ").lower()
+group_size = int(input("How many people in your group? "))
+
+print("\\n=== Analyzing your preferences... ===")
+
+# Complex decision logic
+if cuisine == "italian":
+    if budget == "high" and group_size <= 4:
+        restaurant = "Bella Vista (upscale Italian)"
+        price_range = "$$$"
+    elif budget == "medium":
+        restaurant = "Tony's Pizzeria"
+        price_range = "$$"
+    else:
+        restaurant = "Little Italy Cafe"
+        price_range = "$"
+elif cuisine == "chinese":
+    if dietary == "vegan":
+        restaurant = "Green Dragon (vegan Chinese)"
+    elif budget == "high":
+        restaurant = "Golden Palace"
+        price_range = "$$$"
+    else:
+        restaurant = "Panda Express"
+        price_range = "$"
+elif cuisine == "mexican":
+    if dietary in ["vegetarian", "vegan"] and budget != "low":
+        restaurant = "Verde Mexican Grill"
+    elif group_size > 6:
+        restaurant = "Casa Grande (family style)"
+    else:
+        restaurant = "Taco Bell"
+        price_range = "$"
+else:
+    restaurant = "The Local Diner (American classics)"
+    price_range = "$$"
+
+# Additional considerations
+if dietary == "gluten-free":
+    print("Note: Please confirm gluten-free options when you call.")
+
+if group_size > 8:
+    print("Recommendation: Call ahead for large group reservations.")
+
+# Final recommendation
+print(f"\\n=== Recommendation ===")
+print(f"Restaurant: {restaurant}")
+if 'price_range' in locals():
+    print(f"Price Range: {price_range}")
+print(f"Perfect for: {group_size} people with {dietary if dietary != 'none' else 'no'} dietary restrictions")
+print(f"Cuisine: {cuisine.title()}")
+
+# Follow-up question
+if input("\\nWould you like directions? (yes/no): ").lower().startswith('y'):
+    print("Great! Check Google Maps or call the restaurant for directions.")`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Create a movie recommendation bot that considers genre preference, age rating, and viewing time to suggest appropriate movies.',
+            solution: `print("Movie Recommendation Bot")
+print("I'll help you find the perfect movie!")
+
+# Gather preferences
+genre = input("Preferred genre (action/comedy/drama/horror/sci-fi): ").lower()
+max_rating = input("Maximum age rating (g/pg/pg-13/r): ").lower()
+time_available = int(input("How many minutes do you have? "))
+mood = input("What's your mood? (happy/sad/excited/relaxed): ").lower()
+
+print("\\nAnalyzing your preferences...")
+
+# Decision logic
+if time_available < 90:
+    length_category = "short"
+elif time_available < 150:
+    length_category = "medium"
+else:
+    length_category = "long"
+
+# Genre-based recommendations
+if genre == "action":
+    if max_rating in ["r"] and mood == "excited":
+        movie = "John Wick"
+        duration = 101
+    elif max_rating in ["pg-13", "r"] and length_category != "short":
+        movie = "The Avengers"
+        duration = 143
+    else:
+        movie = "The Incredibles"
+        duration = 115
+elif genre == "comedy":
+    if mood == "happy" and max_rating in ["pg-13", "r"]:
+        movie = "Superbad"
+        duration = 113
+    elif length_category == "short":
+        movie = "Paddington"
+        duration = 95
+    else:
+        movie = "Toy Story"
+        duration = 81
+elif genre == "drama":
+    if mood == "sad" and length_category != "short":
+        movie = "The Pursuit of Happyness"
+        duration = 117
+    else:
+        movie = "Finding Nemo"
+        duration = 100
+else:
+    movie = "Back to the Future"
+    duration = 116
+
+# Check if movie fits time constraint
+if duration <= time_available:
+    print(f"\\n🎬 Perfect match: {movie}")
+    print(f"Duration: {duration} minutes")
+    print(f"You'll have {time_available - duration} minutes to spare!")
+else:
+    print(f"\\n🎬 Recommended: {movie}")
+    print(f"Duration: {duration} minutes")
+    print(f"Note: This is {duration - time_available} minutes longer than your available time.")
+    
+    if input("Would you like a shorter alternative? (yes/no): ").lower().startswith('y'):
+        print("Try a TV episode or short film instead!")
+
+print("\\nEnjoy your movie! 🍿")`,
+            hints: [
+              'Use nested if statements to handle multiple criteria',
+              'Consider time constraints when making recommendations',
+              'Provide fallback options when preferences don\'t match perfectly',
+              'Use logical operators to combine multiple conditions'
+            ]
+          }
+        ]
+      }
+    },
+    tags: ['conditionals', 'boolean-logic', 'decision-trees', 'complex-logic']
+  },
+  {
+    id: 'loops-repetition',
+    title: 'Loops and Iteration Control',
+    description: 'Master for loops, while loops, and advanced iteration techniques',
+    category: 'Control Flow',
+    difficulty: 'beginner',
+    prerequisites: ['making-choices'],
+    nextConcepts: ['api-fundamentals'],
+    estimatedTime: 30,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Tutorial Steps',
+            content: `**Step 1: Understand For Loops**
+
+For loops repeat code a specific number of times:
+
+\`\`\`python
+# Basic counting
+for i in range(5):
+    print(f"Count: {i}")
+
+# Custom range
+for num in range(1, 11):  # 1 to 10
+    print(f"Number: {num}")
+
+# Step size
+for even in range(0, 21, 2):  # Even numbers 0 to 20
+    print(even)
+\`\`\`
+
+**Step 2: Master While Loops**
+
+While loops continue until a condition becomes False:
+
+\`\`\`python
+count = 0
+while count < 5:
+    print(f"Count is: {count}")
+    count += 1  # Important: update the condition variable!
+
+print("Loop finished")
+\`\`\`
+
+**Step 3: Create Interactive Loops**
+
+Use loops to create ongoing conversations:
+
+\`\`\`python
+print("Chat Bot - Type 'quit' to exit")
+
+while True:
+    user_input = input("You: ")
+    
+    if user_input.lower() == 'quit':
+        print("Bot: Goodbye!")
+        break
+    
+    print(f"Bot: You said '{user_input}'. That's interesting!")
+\`\`\`
+
+**Step 4: Implement Loop Control**
+
+Use break and continue to control loop execution:
+
+\`\`\`python
+for i in range(10):
+    if i == 3:
+        continue  # Skip this iteration
+    if i == 7:
+        break     # Exit the loop
+    print(i)
+\`\`\``,
+            codeExample: `# Advanced chatbot with conversation loop
+import random
+
+print("=== Advanced ChatBot ===")
+print("I can chat, tell jokes, and play games!")
+print("Commands: chat, joke, game, help, quit")
+
+# Bot responses for different topics
+chat_responses = [
+    "That's really interesting! Tell me more.",
+    "I see what you mean. How does that make you feel?",
+    "That's a great point. I hadn't thought of it that way.",
+    "Thanks for sharing that with me!",
+    "That sounds fascinating. What happened next?"
+]
+
+jokes = [
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "Why did the scarecrow win an award? He was outstanding in his field!",
+    "Why don't eggs tell jokes? They'd crack each other up!",
+    "What do you call a fake noodle? An impasta!"
+]
+
+conversation_count = 0
+
+# Main conversation loop
+while True:
+    user_input = input("\\nYou: ").lower().strip()
+    
+    # Check for exit command
+    if user_input in ['quit', 'exit', 'bye']:
+        print(f"Bot: Thanks for chatting! We had {conversation_count} exchanges. Goodbye!")
+        break
+    
+    # Handle different commands
+    elif user_input == 'help':
+        print("Bot: I can respond to: chat, joke, game, help, quit")
+        print("     Or just type anything to have a conversation!")
+    
+    elif user_input == 'joke':
+        joke = random.choice(jokes)
+        print(f"Bot: {joke}")
+        conversation_count += 1
+    
+    elif user_input == 'game':
+        print("Bot: Let's play a guessing game! I'm thinking of a number 1-10.")
+        secret_number = random.randint(1, 10)
+        attempts = 0
+        max_attempts = 3
+        
+        # Nested game loop
+        while attempts < max_attempts:
+            try:
+                guess = int(input(f"Guess #{attempts + 1}: "))
+                attempts += 1
+                
+                if guess == secret_number:
+                    print(f"Bot: Correct! You got it in {attempts} attempts!")
+                    break
+                elif guess < secret_number:
+                    print("Bot: Too low!")
+                else:
+                    print("Bot: Too high!")
+                    
+                if attempts == max_attempts:
+                    print(f"Bot: Game over! The number was {secret_number}")
+                    
+            except ValueError:
+                print("Bot: Please enter a valid number!")
+                attempts -= 1  # Don't count invalid input as an attempt
+        
+        conversation_count += 1
+    
+    elif user_input == 'chat':
+        topic = input("What would you like to chat about? ")
+        response = random.choice(chat_responses)
+        print(f"Bot: {response}")
+        conversation_count += 1
+    
+    else:
+        # General conversation
+        if len(user_input) > 0:
+            response = random.choice(chat_responses)
+            print(f"Bot: {response}")
+            conversation_count += 1
+        else:
+            print("Bot: I didn't catch that. Type 'help' for commands!")
+
+print("\\nBot session ended. Thanks for using ChatBot!")`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Create a "Password Strength Checker" bot that keeps asking for passwords until the user enters one that meets all criteria (8+ characters, has uppercase, lowercase, and numbers).',
+            solution: `import string
+
+print("Password Strength Checker Bot")
+print("I'll help you create a strong password!")
+print("Requirements: 8+ characters, uppercase, lowercase, and numbers")
+
+def check_password_strength(password):
+    """Check if password meets all requirements"""
+    if len(password) < 8:
+        return False, "Password must be at least 8 characters long"
+    
+    has_upper = any(c.isupper() for c in password)
+    has_lower = any(c.islower() for c in password)
+    has_digit = any(c.isdigit() for c in password)
+    
+    missing = []
+    if not has_upper:
+        missing.append("uppercase letter")
+    if not has_lower:
+        missing.append("lowercase letter")
+    if not has_digit:
+        missing.append("number")
+    
+    if missing:
+        return False, f"Password needs: {', '.join(missing)}"
+    
+    return True, "Password is strong!"
+
+attempts = 0
+max_attempts = 5
+
+while attempts < max_attempts:
+    password = input(f"\\nAttempt {attempts + 1}: Enter a password: ")
+    attempts += 1
+    
+    is_strong, message = check_password_strength(password)
+    print(f"Result: {message}")
+    
+    if is_strong:
+        print("🎉 Congratulations! Your password is strong and secure!")
+        print(f"You created a strong password in {attempts} attempts.")
+        break
+    else:
+        remaining = max_attempts - attempts
+        if remaining > 0:
+            print(f"Try again! You have {remaining} attempts remaining.")
+        else:
+            print("\\n❌ Maximum attempts reached!")
+            print("Here's an example of a strong password: MyP@ssw0rd123")
+            
+            if input("Would you like to try again? (yes/no): ").lower().startswith('y'):
+                attempts = 0  # Reset attempts
+                max_attempts = 3  # Give fewer attempts for retry
+                print("\\nOkay, let's try again with 3 more attempts!")
+            else:
+                print("Come back when you're ready to create a strong password!")
+                break
+
+print("\\nRemember: Never share your password with anyone!")`,
+            hints: [
+              'Use a while loop to keep asking for passwords',
+              'Create a function to check password requirements',
+              'Use any() with generator expressions to check for character types',
+              'Track attempts and provide helpful feedback',
+              'Allow users to retry after reaching max attempts'
+            ]
+          }
+        ]
+      }
+    },
+    tags: ['loops', 'for-loops', 'while-loops', 'iteration', 'control-flow']
+  },
+  {
+    id: 'api-fundamentals',
+    title: 'Understanding APIs and Web Communication',
+    description: 'Learn what APIs are, how they work, and how to integrate external data sources',
+    category: 'APIs',
+    difficulty: 'intermediate',
+    prerequisites: ['loops-repetition'],
+    nextConcepts: ['api-implementation'],
+    estimatedTime: 35,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'What Are APIs?',
+            content: `**API stands for Application Programming Interface**
+
+Think of an API as a waiter in a restaurant:
+• You (your program) make a request
+• The waiter (API) takes your request to the kitchen (external service)
+• The kitchen (service) prepares your order (processes the request)
+• The waiter brings back your food (returns the data)
+
+**Common API Types:**
+• **Weather APIs**: Get current weather and forecasts
+• **News APIs**: Fetch latest news articles
+• **Social Media APIs**: Access posts and user data
+• **Financial APIs**: Get stock prices and market data
+• **Entertainment APIs**: Movies, music, games information
+
+**Why Use APIs?**
+Instead of building everything from scratch, APIs let you access existing services and data. Want weather information? Use a weather API. Need jokes? Use a joke API.`,
+            codeExample: `# Understanding API concepts with examples
+print("=== API Concepts Demonstration ===")
+
+# Simulating an API response (what you'd get from a real API)
+fake_weather_response = {
+    "location": "New York",
+    "temperature": 72,
+    "condition": "Sunny",
+    "humidity": 45,
+    "wind_speed": 8
 }
 
-export const ConceptAtom: React.FC<ConceptAtomProps> = ({
-  atom,
-  modality,
-  userProfile,
-  isCompleted,
-  onComplete
-}) => {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const [currentChallenge, setCurrentChallenge] = useState(0);
-  const [userCode, setUserCode] = useState('');
-  const [showHint, setShowHint] = useState(false);
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
-  const [currentHint, setCurrentHint] = useState(0);
+fake_news_response = {
+    "articles": [
+        {
+            "title": "Python Programming Gains Popularity",
+            "author": "Tech Reporter",
+            "published": "2024-01-15",
+            "summary": "Python continues to be the most popular programming language..."
+        }
+    ]
+}
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'beginner': return 'from-green-500 to-emerald-500';
-      case 'intermediate': return 'from-yellow-500 to-orange-500';
-      case 'advanced': return 'from-red-500 to-pink-500';
-      default: return 'from-gray-500 to-slate-500';
+# Demonstrating how you'd use API data
+print("Weather Information:")
+print(f"Location: {fake_weather_response['location']}")
+print(f"Temperature: {fake_weather_response['temperature']}°F")
+print(f"Condition: {fake_weather_response['condition']}")
+
+print("\\nLatest News:")
+for article in fake_news_response['articles']:
+    print(f"Title: {article['title']}")
+    print(f"By: {article['author']}")
+
+print("\\n=== This is how APIs provide structured data to your programs! ===")`
+          },
+          {
+            title: 'HTTP and JSON Basics',
+            content: `**HTTP (HyperText Transfer Protocol)**: The foundation of web communication
+
+**Common HTTP Methods:**
+- **GET**: Retrieve data (like asking for information)
+- **POST**: Send data (like submitting a form)
+- **PUT**: Update existing data
+- **DELETE**: Remove data
+
+**JSON (JavaScript Object Notation)**: The most common data format for APIs
+
+JSON looks like Python dictionaries:
+\`\`\`json
+{
+  "name": "John Doe",
+  "age": 30,
+  "city": "New York",
+  "hobbies": ["reading", "coding", "hiking"]
+}
+\`\`\`
+
+**Status Codes**: Tell you if your request worked
+- 200: Success
+- 404: Not found
+- 500: Server error`
+          },
+          {
+            title: 'Popular Free APIs for Learning',
+            content: `**Entertainment APIs:**
+- **JSONPlaceholder**: Fake data for testing
+- **icanhazdadjoke**: Random dad jokes
+- **Numbers API**: Interesting facts about numbers
+- **Cat Facts API**: Random cat facts
+
+**Utility APIs:**
+- **Random User API**: Generate fake user profiles
+- **Quotable**: Inspirational quotes
+- **REST Countries**: Information about countries
+
+**News and Information:**
+- **NewsAPI**: Headlines from various sources
+- **Wikipedia API**: Access to Wikipedia content
+
+**Weather APIs:**
+- **OpenWeatherMap**: Current weather and forecasts
+- **WeatherAPI**: Detailed weather information
+
+These APIs are perfect for learning because they're free, well-documented, and don't require complex authentication.`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Create a function that simulates parsing different types of API responses. Handle weather data, user profiles, and news articles.',
+            solution: `import json
+
+def parse_weather_data(weather_json):
+    """Parse weather API response"""
+    try:
+        data = json.loads(weather_json) if isinstance(weather_json, str) else weather_json
+        
+        location = data.get('location', 'Unknown')
+        temp = data.get('temperature', 'N/A')
+        condition = data.get('condition', 'Unknown')
+        
+        return f"Weather in {location}: {temp}°F, {condition}"
+    except (json.JSONDecodeError, KeyError) as e:
+        return f"Error parsing weather data: {e}"
+
+def parse_user_profile(user_json):
+    """Parse user profile API response"""
+    try:
+        data = json.loads(user_json) if isinstance(user_json, str) else user_json
+        
+        name = data.get('name', 'Unknown User')
+        email = data.get('email', 'No email')
+        age = data.get('age', 'Unknown age')
+        location = data.get('location', {})
+        city = location.get('city', 'Unknown city')
+        
+        return f"User: {name} ({email}), Age: {age}, Location: {city}"
+    except (json.JSONDecodeError, KeyError) as e:
+        return f"Error parsing user data: {e}"
+
+# Test the functions with sample data
+print("=== API Response Parser Demo ===")
+
+# Sample API responses
+weather_data = {
+    "location": "San Francisco",
+    "temperature": 68,
+    "condition": "Partly Cloudy",
+    "humidity": 65
+}
+
+user_data = {
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "age": 28,
+    "location": {
+        "city": "Seattle",
+        "country": "USA"
     }
-  };
+}
 
-  const copyToClipboard = async (code: string) => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopiedCode(code);
-      setTimeout(() => setCopiedCode(null), 2000);
-    } catch (err) {
-      console.error('Failed to copy code:', err);
-    }
-  };
+# Parse and display results
+print("1. Weather Data:")
+print(parse_weather_data(weather_data))
 
-  const renderVideoContent = () => (
-    <div className="space-y-6">
-      <div className="relative aspect-video bg-gradient-to-br from-slate-900 to-purple-900 rounded-xl overflow-hidden border border-slate-700/50">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <PlayCircle className="w-16 h-16 text-blue-400 hover:text-blue-300 cursor-pointer transition-colors mx-auto mb-4" />
-            <p className="text-white text-lg font-medium">Interactive Video Tutorial</p>
-            <p className="text-slate-300 text-sm">Click to start learning!</p>
-          </div>
-        </div>
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="bg-black/50 backdrop-blur rounded-lg p-3">
-            <p className="text-white text-sm">{atom.content.video?.transcript}</p>
-          </div>
-        </div>
-      </div>
-      
-      {atom.content.text?.sections[0]?.codeExample && (
-        <div className="bg-slate-900 rounded-xl overflow-hidden border border-slate-700/50">
-          <div className="p-4 border-b border-slate-700 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Code className="w-4 h-4 text-blue-400" />
-              <h4 className="text-white font-medium">Live Code Example</h4>
-            </div>
-            <button
-              onClick={() => copyToClipboard(atom.content.text!.sections[0].codeExample!)}
-              className="flex items-center space-x-1 text-slate-400 hover:text-white transition-colors"
-            >
-              {copiedCode === atom.content.text!.sections[0].codeExample ? (
-                <Check className="w-4 h-4 text-green-400" />
-              ) : (
-                <Copy className="w-4 h-4" />
-              )}
-              <span className="text-sm">Copy</span>
-            </button>
-          </div>
-          <SyntaxHighlighter
-            language="python"
-            style={oneDark}
-            customStyle={{ margin: 0, borderRadius: 0 }}
-          >
-            {atom.content.text.sections[0].codeExample}
-          </SyntaxHighlighter>
-        </div>
-      )}
-    </div>
-  );
+print("\\n2. User Profile:")
+print(parse_user_profile(user_data))`,
+            hints: [
+              'Use json.loads() to parse JSON strings',
+              'Use .get() method to safely access dictionary keys',
+              'Handle both string and dictionary inputs',
+              'Implement proper error handling for malformed JSON',
+              'Extract nested data carefully with multiple .get() calls'
+            ]
+          }
+        ]
+      }
+    },
+    tags: ['api', 'http', 'json', 'web-communication', 'data-parsing']
+  },
+  {
+    id: 'api-implementation',
+    title: 'Implementing API Calls in Python',
+    description: 'Learn to make HTTP requests, handle responses, and integrate real APIs into your bots',
+    category: 'APIs',
+    difficulty: 'intermediate',
+    prerequisites: ['api-fundamentals'],
+    nextConcepts: ['making-bot-unique'],
+    estimatedTime: 40,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Making Your First API Call',
+            content: `**Step 1: Install the Requests Library**
 
-  const renderInteractiveContent = () => {
-    const challenges = atom.content.interactive?.challenges || [];
-    const challenge = challenges[currentChallenge];
+The requests library makes HTTP calls simple in Python:
+
+\`\`\`bash
+pip install requests
+\`\`\`
+
+**Step 2: Import and Make a Basic Request**
+
+\`\`\`python
+import requests
+
+response = requests.get("https://api.github.com/users/octocat")
+print(f"Status Code: {response.status_code}")
+print(f"Response: {response.json()}")
+\`\`\`
+
+**Step 3: Handle Responses Properly**
+
+Always check if the request was successful:
+
+\`\`\`python
+if response.status_code == 200:
+    data = response.json()
+    print("Success!")
+else:
+    print(f"Error: {response.status_code}")
+\`\`\`
+
+**Step 4: Add Error Handling**
+
+Make your API calls robust:
+
+\`\`\`python
+try:
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()  # Raises exception for bad status codes
+    return response.json()
+except requests.exceptions.RequestException as e:
+    print(f"API call failed: {e}")
+    return None
+\`\`\``,
+            codeExample: `import requests
+import json
+from datetime import datetime
+
+class APIBot:
+    """A bot that demonstrates various API integrations"""
     
-    if (!challenge) return null;
-
-    return (
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <h4 className="text-xl font-semibold text-white flex items-center space-x-2">
-            <Zap className="w-5 h-5 text-yellow-400" />
-            <span>Hands-On Challenge {currentChallenge + 1} of {challenges.length}</span>
-          </h4>
-          <div className="flex space-x-2">
-            {challenges.map((_, index) => (
-              <div
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index <= currentChallenge ? 'bg-blue-400 scale-110' : 'bg-slate-600'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/20 rounded-xl p-6 border border-slate-700/50">
-          <div className="flex items-start space-x-3 mb-4">
-            <Target className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
-            <div>
-              <h5 className="text-lg font-medium text-white mb-2">Your Mission:</h5>
-              <p className="text-slate-200 leading-relaxed">{challenge.question}</p>
-            </div>
-          </div>
-          
-          {challenge.type === 'code' && (
-            <div className="space-y-4">
-              <div className="bg-slate-900 rounded-lg overflow-hidden border border-slate-700/50">
-                <div className="p-3 border-b border-slate-700 flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <Code className="w-4 h-4 text-green-400" />
-                    <span className="text-slate-300 text-sm font-medium">Your Python Code</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => {
-                        setShowHint(!showHint);
-                        if (!showHint) setCurrentHint(0);
-                      }}
-                      className="text-yellow-400 hover:text-yellow-300 text-sm flex items-center space-x-1 transition-colors"
-                    >
-                      <Lightbulb className="w-4 h-4" />
-                      <span>Need a hint?</span>
-                    </button>
-                  </div>
-                </div>
-                <textarea
-                  value={userCode}
-                  onChange={(e) => setUserCode(e.target.value)}
-                  className="w-full h-32 bg-slate-900 text-slate-200 p-4 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                  placeholder="# Write your Python code here...
-# Remember: every journey starts with a single line!"
-                />
-              </div>
-              
-              <AnimatePresence>
-                {showHint && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg p-4"
-                  >
-                    <div className="flex items-start space-x-3">
-                      <Lightbulb className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
-                      <div className="flex-1">
-                        <p className="text-yellow-200 text-sm font-medium mb-2">
-                          Hint {currentHint + 1} of {challenge.hints.length}:
-                        </p>
-                        <p className="text-yellow-100 text-sm">{challenge.hints[currentHint]}</p>
-                        {challenge.hints.length > 1 && (
-                          <div className="flex items-center space-x-2 mt-3">
-                            <button
-                              onClick={() => setCurrentHint(Math.max(0, currentHint - 1))}
-                              disabled={currentHint === 0}
-                              className="text-xs text-yellow-300 hover:text-yellow-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                              Previous
-                            </button>
-                            <span className="text-xs text-yellow-400">•</span>
-                            <button
-                              onClick={() => setCurrentHint(Math.min(challenge.hints.length - 1, currentHint + 1))}
-                              disabled={currentHint === challenge.hints.length - 1}
-                              className="text-xs text-yellow-300 hover:text-yellow-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                              Next
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              
-              <div className="flex items-center justify-between">
-                <div className="flex space-x-3">
-                  <button className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-lg transition-all shadow-lg flex items-center space-x-2">
-                    <Play className="w-4 h-4" />
-                    <span>Run Code</span>
-                  </button>
-                  <button 
-                    onClick={() => copyToClipboard(challenge.solution || '')}
-                    className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white rounded-lg transition-all flex items-center space-x-2"
-                  >
-                    {copiedCode === challenge.solution ? (
-                      <Check className="w-4 h-4 text-green-400" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                    <span>Copy Solution</span>
-                  </button>
-                </div>
+    def __init__(self):
+        self.session = requests.Session()
+        self.session.headers.update({
+            'User-Agent': 'Python-Bot/1.0'
+        })
+    
+    def get_random_fact(self):
+        """Get a random number fact from Numbers API"""
+        try:
+            url = "http://numbersapi.com/random/trivia"
+            response = self.session.get(url, timeout=10)
+            
+            if response.status_code == 200:
+                return response.text.strip()
+            else:
+                return "Sorry, couldn't fetch a fact right now."
                 
-                {currentChallenge < challenges.length - 1 && (
-                  <button 
-                    onClick={() => {
-                      setCurrentChallenge(currentChallenge + 1);
-                      setUserCode('');
-                      setShowHint(false);
-                      setCurrentHint(0);
-                    }}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg transition-all shadow-lg flex items-center space-x-2"
-                  >
-                    <span>Next Challenge</span>
-                    <ChevronDown className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  };
+        except requests.exceptions.RequestException as e:
+            return f"Error getting fact: {str(e)}"
+    
+    def get_dad_joke(self):
+        """Get a dad joke from icanhazdadjoke API"""
+        try:
+            url = "https://icanhazdadjoke.com/"
+            headers = {"Accept": "application/json"}
+            
+            response = self.session.get(url, headers=headers, timeout=10)
+            
+            if response.status_code == 200:
+                joke_data = response.json()
+                return joke_data["joke"]
+            else:
+                return "Sorry, no jokes available right now."
+                
+        except requests.exceptions.RequestException as e:
+            return f"Error getting joke: {str(e)}"
+    
+    def get_cat_fact(self):
+        """Get a random cat fact"""
+        try:
+            url = "https://catfact.ninja/fact"
+            response = self.session.get(url, timeout=10)
+            
+            if response.status_code == 200:
+                fact_data = response.json()
+                return fact_data["fact"]
+            else:
+                return "Sorry, no cat facts available right now."
+                
+        except requests.exceptions.RequestException as e:
+            return f"Error getting cat fact: {str(e)}"
 
-  const renderTextContent = () => (
-    <div className="space-y-6">
-      {atom.content.text?.sections.map((section, index) => (
-        <motion.div 
-          key={index} 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
-          className="bg-gradient-to-br from-slate-800/30 to-purple-900/10 rounded-xl p-6 border border-slate-700/50"
-        >
-          <h4 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
-            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-            <span>{section.title}</span>
-          </h4>
-          <div className="prose prose-slate prose-invert max-w-none">
-            <p className="text-slate-300 leading-relaxed text-lg">{section.content}</p>
-          </div>
-          
-          {section.codeExample && (
-            <div className="mt-6 bg-slate-900 rounded-lg overflow-hidden border border-slate-700/50">
-              <div className="p-3 border-b border-slate-700 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Code className="w-4 h-4 text-slate-400" />
-                  <span className="text-slate-300 text-sm font-medium">Example Code</span>
-                </div>
-                <button
-                  onClick={() => copyToClipboard(section.codeExample!)}
-                  className="flex items-center space-x-1 text-slate-400 hover:text-white transition-colors"
-                >
-                  {copiedCode === section.codeExample ? (
-                    <Check className="w-4 h-4 text-green-400" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
-                  <span className="text-sm">Copy</span>
-                </button>
-              </div>
-              <SyntaxHighlighter
-                language="python"
-                style={oneDark}
-                customStyle={{ margin: 0, borderRadius: 0 }}
-              >
-                {section.codeExample}
-              </SyntaxHighlighter>
-            </div>
-          )}
-        </motion.div>
-      ))}
-    </div>
-  );
+# Demonstration of the API bot
+def main():
+    print("=== Multi-API Bot Demo ===")
+    print("This bot integrates with multiple APIs to provide various content!")
+    
+    bot = APIBot()
+    
+    while True:
+        print("\\nAvailable commands:")
+        print("1. fact - Random number fact")
+        print("2. joke - Dad joke")
+        print("3. cat - Cat fact")
+        print("4. all - Get one of each")
+        print("5. quit - Exit")
+        
+        choice = input("\\nWhat would you like? ").lower().strip()
+        
+        if choice == "quit":
+            print("Thanks for using the API bot! Goodbye!")
+            break
+        elif choice == "fact":
+            print(f"\\n🔢 Random Fact: {bot.get_random_fact()}")
+        elif choice == "joke":
+            print(f"\\n😄 Dad Joke: {bot.get_dad_joke()}")
+        elif choice == "cat":
+            print(f"\\n🐱 Cat Fact: {bot.get_cat_fact()}")
+        elif choice == "all":
+            print("\\n🎉 Here's a variety pack!")
+            print(f"\\n🔢 Fact: {bot.get_random_fact()}")
+            print(f"\\n😄 Joke: {bot.get_dad_joke()}")
+            print(f"\\n🐱 Cat Fact: {bot.get_cat_fact()}")
+        else:
+            print("Invalid choice. Please try again.")
 
-  const renderContent = () => {
-    switch (modality) {
-      case 'video': return renderVideoContent();
-      case 'interactive': return renderInteractiveContent();
-      case 'text': return renderTextContent();
-      case 'audio': return renderVideoContent(); // Simplified for demo
-      case 'diagram': return renderTextContent(); // Simplified for demo
-      default: return renderTextContent();
-    }
-  };
+if __name__ == "__main__":
+    main()`
+          },
+          {
+            title: 'Error Handling and Best Practices',
+            content: `**Comprehensive Error Handling:**
 
-  return (
-    <motion.div
-      layout
-      className="backdrop-blur-lg bg-slate-800/30 rounded-2xl border border-slate-700/50 overflow-hidden shadow-2xl"
-    >
-      {/* Header */}
-      <div className="p-6 border-b border-slate-700/50 bg-gradient-to-r from-slate-800/50 to-purple-900/20">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1">
-            <div className="flex items-center space-x-3 mb-2">
-              <h2 className="text-2xl font-bold text-white">{atom.title}</h2>
-              {isCompleted && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="flex items-center space-x-1"
-                >
-                  <CheckCircle className="w-6 h-6 text-green-400" />
-                  <span className="text-green-400 text-sm font-medium">Completed!</span>
-                </motion.div>
-              )}
-            </div>
-            <p className="text-slate-300 text-lg leading-relaxed">{atom.description}</p>
-          </div>
-          
-          <div className={`px-3 py-1 rounded-full bg-gradient-to-r ${getDifficultyColor(atom.difficulty)} text-white text-sm font-medium shadow-lg`}>
-            {atom.difficulty}
-          </div>
-        </div>
+\`\`\`python
+import requests
+from requests.exceptions import RequestException, Timeout, ConnectionError
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4 text-sm text-slate-400">
-            <div className="flex items-center space-x-1">
-              <Clock className="w-4 h-4" />
-              <span>{atom.estimatedTime} min</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Tag className="w-4 h-4" />
-              <span>{atom.category}</span>
-            </div>
-          </div>
-          
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center space-x-2 text-slate-300 hover:text-white transition-colors bg-slate-700/50 hover:bg-slate-600/50 px-3 py-1 rounded-lg"
-          >
-            <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
-            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </button>
-        </div>
+def safe_api_call(url, **kwargs):
+    try:
+        response = requests.get(url, timeout=10, **kwargs)
+        response.raise_for_status()  # Raises HTTPError for bad responses
+        return response.json()
+    
+    except Timeout:
+        return {"error": "Request timed out"}
+    except ConnectionError:
+        return {"error": "Connection failed"}
+    except requests.exceptions.HTTPError as e:
+        return {"error": f"HTTP error: {e.response.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {"error": f"Request failed: {str(e)}"}
+    except ValueError:  # JSON decode error
+        return {"error": "Invalid JSON response"}
+\`\`\`
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mt-4">
-          {atom.tags.map(tag => (
-            <span
-              key={tag}
-              className="px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-md border border-slate-600/50"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
+**Best Practices:**
+- Always use timeouts to prevent hanging requests
+- Handle different types of errors appropriately
+- Use sessions for multiple requests to the same API
+- Respect rate limits and add delays if needed
+- Cache responses when appropriate to reduce API calls
 
-      {/* Content */}
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            <div className="p-6">
-              {renderContent()}
-              
-              {/* Completion Button */}
-              {!isCompleted && (
-                <div className="flex justify-center mt-8">
-                  <motion.button
-                    onClick={onComplete}
-                    className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all shadow-lg flex items-center space-x-2 text-lg"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Heart className="w-5 h-5" />
-                    <span>Mark as Complete</span>
-                  </motion.button>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
+**API Key Management:**
+- Never hardcode API keys in your source code
+- Use environment variables or configuration files
+- Keep API keys secure and don't share them publicly`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Create a weather bot that uses a real weather API. Include error handling, user input for city names, and formatted output.',
+            solution: `import requests
+from datetime import datetime
+
+class WeatherBot:
+    def __init__(self):
+        # Note: You would need a real API key for a production weather service
+        self.base_url = "http://api.openweathermap.org/data/2.5/weather"
+        self.session = requests.Session()
+    
+    def get_weather(self, city):
+        """Get current weather for a city (simulated for demo)"""
+        # This is a simulation - in real use, you'd need an API key
+        print(f"\\n🌤️  Weather for {city.title()} (Simulated Data):")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print(f"🌡️  Temperature: 22°C (feels like 24°C)")
+        print(f"☁️  Condition: Partly Cloudy")
+        print(f"💧 Humidity: 65%")
+        print(f"💨 Wind Speed: 12.5 km/h")
+        print(f"📅 Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        return True
+    
+    def run(self):
+        print("🌤️  Welcome to WeatherBot!")
+        print("I can provide current weather information for any city.")
+        print("\\nNote: This demo uses simulated data.")
+        
+        while True:
+            print("\\nCommands:")
+            print("• Type a city name to get weather")
+            print("• Type 'quit' to exit")
+            
+            user_input = input("\\nEnter city name or command: ").strip()
+            
+            if user_input.lower() == 'quit':
+                print("Thanks for using WeatherBot! Stay weather-aware! 🌈")
+                break
+            elif len(user_input) > 0:
+                self.get_weather(user_input)
+            else:
+                print("Please enter a city name.")
+
+# Run the weather bot
+if __name__ == "__main__":
+    bot = WeatherBot()
+    bot.run()`,
+            hints: [
+              'Sign up for a free API key from OpenWeatherMap or similar service',
+              'Use requests.get() with proper parameters',
+              'Handle different HTTP status codes (200, 404, 401)',
+              'Format the weather data in a user-friendly way',
+              'Add timeout and error handling for network issues'
+            ]
+          }
+        ]
+      }
+    },
+    tags: ['api-implementation', 'http-requests', 'error-handling', 'real-world-apis']
+  },
+  {
+    id: 'making-bot-unique',
+    title: 'Creating Your Unique Bot',
+    description: 'Combine all your skills to build a personalized, feature-rich bot with personality and advanced capabilities',
+    category: 'Integration',
+    difficulty: 'intermediate',
+    prerequisites: ['api-implementation'],
+    nextConcepts: ['ready-set-code'],
+    estimatedTime: 45,
+    content: {
+      text: {
+        sections: [
+          {
+            title: 'Planning Your Bot',
+            content: `**Step 1: Define Your Bot's Purpose**
+
+Before coding, plan your bot's identity:
+• **Purpose**: What problem does it solve? (entertainment, productivity, information, etc.)
+• **Personality**: Formal, friendly, humorous, professional?
+• **Target Audience**: Who will use your bot?
+• **Core Features**: What are the 3-5 main things it can do?
+
+**Step 2: Design the User Experience**
+
+Plan how users will interact with your bot:
+• **Commands**: What keywords trigger different features?
+• **Conversation Flow**: How does the bot guide users?
+• **Error Handling**: How does it respond to unexpected input?
+• **Help System**: How do users learn what the bot can do?
+
+**Step 3: Choose Your APIs**
+
+Select APIs that match your bot's purpose:
+• Weather bots need weather APIs
+• Entertainment bots might use joke, quote, or trivia APIs
+• News bots need news APIs
+• Study bots could use dictionary or educational APIs
+
+**Step 4: Add Personality**
+
+Make your bot memorable with:
+• Varied responses using random selection
+• Consistent tone and voice
+• Helpful error messages
+• Encouraging feedback
+• Personal touches that reflect your creativity`,
+            codeExample: `# Example: Personal Assistant Bot Framework
+import requests
+import random
+from datetime import datetime
+
+class PersonalAssistantBot:
+    def __init__(self, name="Assistant"):
+        self.name = name
+        self.user_name = ""
+        self.conversation_history = []
+        self.session = requests.Session()
+        
+        # Personality traits
+        self.greetings = [
+            f"Hello! I'm {self.name}, your personal assistant.",
+            f"Hi there! {self.name} here, ready to help!",
+            f"Greetings! I'm {self.name}, what can I do for you today?"
+        ]
+        
+        self.encouragements = [
+            "You're doing great!",
+            "Keep up the excellent work!",
+            "I believe in you!",
+            "You've got this!"
+        ]
+    
+    def greet_user(self):
+        """Initial greeting and setup"""
+        print(random.choice(self.greetings))
+        
+        if not self.user_name:
+            self.user_name = input("What's your name? ").strip()
+            print(f"Nice to meet you, {self.user_name}! 😊")
+            
+        print(f"\\nI can help you with various tasks, {self.user_name}.")
+        print("Type 'help' to see what I can do!")
+    
+    def show_help(self):
+        """Display available commands"""
+        help_text = f"""
+🤖 {self.name} - Available Commands:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📰 news - Get latest headlines
+💡 fact - Random interesting fact
+😄 joke - Tell a joke
+💪 motivate - Get motivational quote
+⏰ time - Current time and date
+📝 note [text] - Save a note
+📋 notes - View saved notes
+❓ help - Show this help
+👋 quit - Exit the program
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 You can also just chat with me naturally!
+        """
+        print(help_text)
+    
+    def get_random_fact(self):
+        """Get a random fact"""
+        try:
+            response = self.session.get("http://numbersapi.com/random/trivia", timeout=10)
+            if response.status_code == 200:
+                return response.text.strip()
+            else:
+                return "Here's a fact: You're awesome for learning to code!"
+        except:
+            return "Did you know? Python is named after Monty Python's Flying Circus!"
+    
+    def get_joke(self):
+        """Get a random joke"""
+        jokes = [
+            "Why do programmers prefer dark mode? Because light attracts bugs!",
+            "How many programmers does it take to change a light bulb? None, that's a hardware problem!",
+            "Why do Python programmers prefer snakes? Because they don't have to deal with Java!",
+            "What's a programmer's favorite hangout place? Foo Bar!"
+        ]
+        return random.choice(jokes)
+    
+    def save_note(self, note_text):
+        """Save a user note"""
+        if not hasattr(self, 'notes'):
+            self.notes = []
+        
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        self.notes.append({"text": note_text, "timestamp": timestamp})
+        return f"Note saved! You now have {len(self.notes)} notes."
+    
+    def show_notes(self):
+        """Display saved notes"""
+        if not hasattr(self, 'notes') or not self.notes:
+            return "You don't have any notes yet. Use 'note [text]' to save one!"
+        
+        result = f"\\n📝 Your Notes ({len(self.notes)} total):\\n"
+        result += "━" * 40 + "\\n"
+        
+        for i, note in enumerate(self.notes, 1):
+            result += f"{i}. {note['text']}\\n"
+            result += f"   📅 {note['timestamp']}\\n\\n"
+        
+        return result
+    
+    def process_command(self, user_input):
+        """Process user commands and return appropriate responses"""
+        command = user_input.lower().strip()
+        
+        if command == "help":
+            self.show_help()
+        elif command == "fact":
+            fact = self.get_random_fact()
+            print(f"\\n💡 Random Fact: {fact}")
+        elif command == "joke":
+            joke = self.get_joke()
+            print(f"\\n😄 Here's a joke: {joke}")
+        elif command == "motivate":
+            motivation = random.choice(self.encouragements)
+            print(f"\\n💪 {motivation} Keep pushing forward, {self.user_name}!")
+        elif command == "time":
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print(f"\\n⏰ Current time: {current_time}")
+        elif command.startswith("note "):
+            note_text = command[5:].strip()
+            if note_text:
+                result = self.save_note(note_text)
+                print(f"\\n📝 {result}")
+            else:
+                print("Please provide text for your note. Example: note Buy groceries")
+        elif command == "notes":
+            notes = self.show_notes()
+            print(notes)
+        elif command in ["quit", "exit", "bye"]:
+            return "quit"
+        else:
+            # Natural conversation
+            responses = [
+                f"That's interesting, {self.user_name}! Tell me more.",
+                "I see what you mean. How can I help with that?",
+                "Thanks for sharing! Is there anything specific I can help you with?",
+                f"I appreciate you talking with me, {self.user_name}. What would you like to do?"
+            ]
+            print(random.choice(responses))
+    
+    def run(self):
+        """Main bot loop"""
+        self.greet_user()
+        
+        while True:
+            try:
+                user_input = input(f"\\n{self.user_name}: ").strip()
+                
+                if not user_input:
+                    continue
+                
+                result = self.process_command(user_input)
+                
+                if result == "quit":
+                    print(f"\\nGoodbye, {self.user_name}! It was great chatting with you! 🌟")
+                    break
+                    
+            except KeyboardInterrupt:
+                print(f"\\n\\nGoodbye, {self.user_name}! Take care! 👋")
+                break
+            except Exception as e:
+                print(f"\\nOops! Something went wrong: {str(e)}")
+                print("But don't worry, I'm still here to help!")
+
+# Run the bot
+if __name__ == "__main__":
+    bot = PersonalAssistantBot("Alex")
+    bot.run()`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'code',
+            question: 'Create a comprehensive "Study Buddy Bot" that combines multiple APIs and features: motivational quotes, study timers, note-taking, and progress tracking. Include proper error handling and a polished user experience.',
+            solution: `import requests
+import time
+import random
+from datetime import datetime, timedelta
+
+class StudyBuddyBot:
+    def __init__(self):
+        self.name = "StudyBuddy"
+        self.user_name = ""
+        self.study_sessions = []
+        self.notes = []
+        self.goals = []
+        self.session = requests.Session()
+        
+        # Motivational quotes (fallback if API fails)
+        self.motivational_quotes = [
+            "The expert in anything was once a beginner. - Helen Hayes",
+            "Success is the sum of small efforts repeated day in and day out. - Robert Collier",
+            "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+            "The beautiful thing about learning is that no one can take it away from you. - B.B. King"
+        ]
+        
+        self.study_tips = [
+            "Take a 5-10 minute break every 25-30 minutes (Pomodoro Technique)",
+            "Study in a well-lit, quiet environment",
+            "Stay hydrated - your brain needs water to function optimally",
+            "Use active recall: test yourself instead of just re-reading"
+        ]
+    
+    def greet_user(self):
+        """Welcome the user and get their name"""
+        print("📚 Welcome to StudyBuddy - Your Personal Learning Companion! 🎓")
+        
+        if not self.user_name:
+            self.user_name = input("\\nWhat's your name, future scholar? ").strip()
+            print(f"\\nGreat to meet you, {self.user_name}! 🌟")
+            print("I'm here to help you study effectively and stay motivated.")
+        
+        self.show_daily_overview()
+    
+    def show_daily_overview(self):
+        """Show today's study overview"""
+        today = datetime.now().strftime("%Y-%m-%d")
+        today_sessions = [s for s in self.study_sessions if s['date'] == today]
+        total_time = sum(s['duration'] for s in today_sessions)
+        
+        print(f"\\n📊 Today's Study Overview ({today})")
+        print("━" * 40)
+        print(f"📚 Study sessions: {len(today_sessions)}")
+        print(f"⏱️  Total study time: {total_time} minutes")
+        print(f"📝 Notes saved: {len(self.notes)}")
+        print(f"🎯 Active goals: {len([g for g in self.goals if not g.get('completed', False)])}")
+    
+    def show_help(self):
+        """Display all available commands"""
+        help_text = f"""
+📚 {self.name} - Your Study Companion Commands:
