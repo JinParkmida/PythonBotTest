@@ -138,6 +138,11 @@ else:  # If it's NOT "good" (meaning "bad" or anything else)
     print("Oh no, I hope your day gets better soon!")
 
 print("Thanks for chatting with me!")`
+          },
+          {
+            title: 'Common Input Mistakes',
+            content: `Users don't always type what you expect. If you ask for a number and they type words, Python raises a \`ValueError\`. Wrap number conversions in a \`try/except\` block so your bot can respond nicely instead of crashing.`,
+            codeExample: `try:\n    user_age = int(input("How old are you? "))\nexcept ValueError:\n    print("Please enter a number, not words!")`
           }
         ]
       },
@@ -151,7 +156,8 @@ print("Wow, " + favorite_color + " is a beautiful color!")`,
             hints: [
               'Use input() to ask the question and store the answer',
               'Use print() with + to combine your message with their answer',
-              'Remember to put quotes around your text parts'
+              'Remember to put quotes around your text parts',
+              'If you expect numbers later, use try/except with int(input())'
             ]
           },
           {
@@ -166,7 +172,8 @@ else:
               'Use input() to get their answer',
               'Use if/else to check if they said "yes"',
               'The else will catch "no" and anything else they type',
-              'Try typing "YES" or "Yes" - what happens? (We\'ll fix this later!)'
+              'Try typing "YES" or "Yes" - what happens? (We\'ll fix this later!)',
+              'Use try/except around int() if you ever ask for numbers'
             ]
           }
         ]
@@ -241,6 +248,11 @@ print("Score: " + str(score))
 
 score = score + 5  # Add 5 to the current score
 print("New score: " + str(score))`
+          },
+          {
+            title: 'Beware of Bad Input',
+            content: `When you turn the result of \`input()\` into a number, users might type something that isn't numeric. This triggers a \`ValueError\`. Use \`try/except\` so your bot can explain the problem instead of crashing.`,
+            codeExample: `try:\n    age = int(input("How old are you? "))\nexcept ValueError:\n    print("Oops! Please enter a numeric age.")`
           }
         ]
       },
@@ -260,7 +272,8 @@ print("You were born in " + str(birth_year))`,
               'Use input() to get the name and age',
               'Use int() to convert the age from text to a number',
               'Calculate birth year by subtracting age from current year (2024)',
-              'Use str() to convert the birth year back to text for printing'
+              'Use str() to convert the birth year back to text for printing',
+              'Wrap the int() call in try/except to handle bad input'
             ]
           }
         ]
@@ -345,6 +358,11 @@ else:
 
 # You can also do it in one line:
 # if answer.lower() == "yes":`
+          },
+          {
+            title: 'Troubleshooting User Choices',
+            content: `Sometimes users type letters when you expect numbers or give unexpected answers. Wrap number conversions in \`try/except\` and provide friendly error messages when their input doesn't match what you expect.`,
+            codeExample: `try:\n    choice = int(input("Pick a number 1-3: "))\nexcept ValueError:\n    print("Numbers only! Try again.")`
           }
         ]
       },
@@ -368,7 +386,8 @@ else:
               'Use input() to ask about the meal',
               'Use .lower() to handle different capitalizations',
               'Use if/elif/else to check for each meal type',
-              'Include a helpful else message for unexpected inputs'
+              'Include a helpful else message for unexpected inputs',
+              'If something odd happens, you can use try/except to handle it'
             ]
           },
           {
@@ -392,7 +411,8 @@ else:
               'Ask for their question first (just for fun)',
               'Get a number from 1-3 using int(input())',
               'Use if/elif/else to give different responses',
-              'The \\n in the print makes a blank line for better formatting'
+              'The \\n in the print makes a blank line for better formatting',
+              'Wrap the number input in try/except to catch non-numbers'
             ]
           }
         ]
@@ -495,6 +515,11 @@ while True:
         print("Thanks for sharing that you're feeling " + mood + ".")
     
     print("Feelings are important to acknowledge.")`
+          },
+          {
+            title: 'Avoiding Infinite Loops',
+            content: `If your loop expects a number and someone types text, Python throws a \`ValueError\` and the loop stops. Use \`try/except\` inside the loop to catch mistakes and continue asking.`,
+            codeExample: `while True:\n    try:\n        guess = int(input("Your guess: "))\n    except ValueError:\n        print("That's not a number!")\n        continue\n    # continue with your checks...`
           }
         ]
       },
@@ -549,7 +574,8 @@ print("Thanks for playing!")`,
               'Use while True: to keep asking for guesses',
               'Use int(input()) to get their guess as a number',
               'Compare their guess to your secret number',
-              'Use break to stop the loop when they guess correctly'
+              'Use break to stop the loop when they guess correctly',
+              'Add try/except around int(input()) to catch bad guesses'
             ]
           }
         ]
@@ -662,6 +688,11 @@ while True:
         print("\\n😂 Hope that made you smile!")
     else:
         print("I only know how to tell jokes! Type 'joke' or 'quit'.")`
+          },
+          {
+            title: 'Handling API Errors',
+            content: `APIs sometimes fail or your internet connection might drop. When \`requests.get\` can't reach the server, it raises an exception. Check the status code and wrap the call in \`try/except\` so your bot can display a friendly message instead of crashing.`,
+            codeExample: `def safe_joke():\n    try:\n        r = requests.get("https://icanhazdadjoke.com/", headers={"Accept": "application/json"})\n        if r.status_code == 200:\n            return r.json()["joke"]\n        return "API returned an error."\n    except requests.exceptions.RequestException:\n        return "Network error. Try again later."`
           }
         ]
       },
@@ -700,7 +731,8 @@ while True:
               'Create a joke_count variable before the loop',
               'Add 1 to joke_count each time you tell a joke',
               'Display the count when telling each joke',
-              'Show the total count when they quit'
+              'Show the total count when they quit',
+              'Wrap the API call in try/except in case the request fails'
             ]
           },
           {
@@ -732,7 +764,8 @@ while True:
               'Use http://numbersapi.com/random as the URL',
               'This API returns plain text, so use response.text instead of response.json()',
               'Change the prompts to ask for "fact" instead of "joke"',
-              'The structure is very similar to the joke bot'
+              'The structure is very similar to the joke bot',
+              'Use try/except around the API call to handle network errors'
             ]
           }
         ]
