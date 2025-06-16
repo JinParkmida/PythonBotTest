@@ -26,7 +26,7 @@ export const ConceptGraph: React.FC<ConceptGraphProps> = ({
     const levels: Record<number, string[]> = {};
     
     // Simple level-based layout
-    conceptAtoms.forEach((atom, index) => {
+    conceptAtoms.forEach(atom => {
       const level = atom.prerequisites.length;
       if (!levels[level]) levels[level] = [];
       levels[level].push(atom.id);
@@ -36,9 +36,9 @@ export const ConceptGraph: React.FC<ConceptGraphProps> = ({
       const level = parseInt(levelStr);
       const y = 100 + level * 150;
       
-      atomIds.forEach((atomId, index) => {
+      atomIds.forEach((atomId, idx) => {
         const totalInLevel = atomIds.length;
-        const x = (index + 1) * (800 / (totalInLevel + 1));
+        const x = (idx + 1) * (800 / (totalInLevel + 1));
         positions[atomId] = { x, y, level };
       });
     });

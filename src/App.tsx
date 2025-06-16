@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bot, 
@@ -946,10 +946,6 @@ if __name__ == "__main__":
     setShowLessons(true);
   };
 
-  const goToLessons = () => {
-    setShowIntro(false);
-    setShowLessons(true);
-  };
 
   const goHome = () => {
     setShowIntro(true);
