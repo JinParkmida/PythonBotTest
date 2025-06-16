@@ -15,35 +15,42 @@ export const conceptAtoms: ConceptAtomType[] = [
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `**Step 1: Choose Your Development Environment**
+            content: `This first lesson prepares your environment so the rest of the course runs smoothly.
+
+**Step 1: Choose Your Development Environment**
 
 You need a place to write and run Python code. You have several options:
-
 • **Online Editors**: Replit, CodePen, or Trinket (no installation required)
 • **Local Installation**: Install Python on your computer with an editor like VS Code
 • **IDEs**: PyCharm, Thonny, or IDLE (comes with Python)
 
+Once you pick a platform, you're ready to test it.
+
 **Step 2: Test Your Setup**
 
-Once you have Python available, test it by running this simple program.
+Run a small program to confirm Python is available.
 
 **Step 3: Understand the Output**
 
-When you run this code, you should see "Hello, Python!" appear in your terminal or output window. This confirms Python is working correctly.
+If you see "Hello, Python!" in your terminal, everything is working.
 
 **Step 4: Experiment**
 
-Try changing the message inside the quotes and run it again. Notice how the output changes - this is your first interaction with Python!`,
+Try changing the message inside the quotes and run it again. Notice how the output changes—your first interaction with Python!
+
+**Common Errors**
+- `'python' is not recognized` – install Python and check your PATH
+- `SyntaxError` from mismatched quotes or parentheses`,
             codeExample: `# Your first Python program
-print("Hello, Python!")
+print("Hello, Python!")  # Display a greeting
 
 # Try changing this message
-print("I'm learning to code!")
+print("I'm learning to code!")  # A second line of output
 
 # You can print multiple lines
-print("Line 1")
-print("Line 2")
-print("Line 3")`
+print("Line 1")  # First line
+print("Line 2")  # Second line
+print("Line 3")  # Third line`
           },
           {
             title: 'Understanding Development Environments',
@@ -58,7 +65,11 @@ print("Line 3")`
 - **Source Code**: The human-readable instructions you write
 - **Execution**: When the computer runs your code
 - **Output**: What your program displays or produces
-- **Debugging**: Finding and fixing errors in your code`
+- **Debugging**: Finding and fixing errors in your code
+
+**Troubleshooting Tips**
+- If nothing prints, ensure you're running the correct file
+- Check file extensions: use ".py" for Python scripts`
           }
         ]
       },
@@ -95,7 +106,9 @@ print("Today's date: 2024-01-15")`,
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `**Step 1: Define What a Bot Is**
+            content: `Now that your environment is configured, let's look at what a bot actually is.
+
+**Step 1: Define What a Bot Is**
 
 A bot is a program that automates tasks by following predefined rules. In our context, we're building conversational bots that:
 • Accept user input
@@ -120,18 +133,22 @@ Bots are used for:
 
 **Step 4: Plan Your Bot's Purpose**
 
-Before coding, decide what your bot will do. Will it provide information, entertain users, solve problems, or automate tasks?`,
+Before coding, decide what your bot will do. Will it provide information, entertain users, solve problems, or automate tasks?
+
+**Common Errors**
+- Not handling unexpected input
+- Trying to build everything at once`,
             codeExample: `# Simple bot demonstration
-# This shows the basic input-process-output pattern
+# Shows the input-process-output pattern
 
 # Input: Get user's name
-user_name = input("What's your name? ")
+user_name = input("What's your name? ")  # Wait for user input
 
 # Process: Create a personalized greeting
-greeting = f"Hello, {user_name}! Welcome to bot programming."
+greeting = f"Hello, {user_name}! Welcome to bot programming."  # Build response
 
 # Output: Display the result
-print(greeting)`
+print(greeting)  # Send greeting back`
           },
           {
             title: 'Bot Architecture and Design Patterns',
@@ -171,7 +188,9 @@ print(greeting)`
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `**Step 1: Create a Simple Output Bot**
+            content: `Building on the previous lesson, let's code a real bot.
+
+**Step 1: Create a Simple Output Bot**
 
 Start with a bot that just displays a message:
 
@@ -206,31 +225,35 @@ else:
 
 **Step 4: Combine Everything**
 
-Put all the pieces together into a complete program that demonstrates input, processing, and output.`,
+Put all the pieces together into a complete program that demonstrates input, processing, and output.
+
+**Common Errors**
+- Forgetting to convert user input types
+- Indentation mistakes in if/else blocks`,
             codeExample: `# Complete basic bot example
-print("=== Welcome to ChatBot v1.0 ===")
-print("I'm a simple bot that can have basic conversations.")
+print("=== Welcome to ChatBot v1.0 ===")  # Intro text
+print("I'm a simple bot that can have basic conversations.")  # Explain purpose
 
 # Get user information
-name = input("\\nWhat's your name? ")
-print(f"Hello, {name}! Nice to meet you.")
+name = input("\\nWhat's your name? ")  # Ask for their name
+print(f"Hello, {name}! Nice to meet you.")  # Respond with greeting
 
 # Ask about their day
-mood = input("How has your day been? (great/okay/rough) ")
+mood = input("How has your day been? (great/okay/rough) ")  # Get mood
 
 # Respond based on their input
 if mood.lower() == "great":
-    print("That's fantastic! I love hearing about good days.")
-    follow_up = input("What made it so great? ")
-    print(f"That sounds amazing, {name}!")
+    print("That's fantastic! I love hearing about good days.")  # Positive path
+    follow_up = input("What made it so great? ")  # Ask for details
+    print(f"That sounds amazing, {name}!")  # Echo response
 elif mood.lower() == "okay":
-    print("Okay days are perfectly normal. Not every day can be extraordinary.")
+    print("Okay days are perfectly normal. Not every day can be extraordinary.")  # Neutral path
 elif mood.lower() == "rough":
-    print("I'm sorry you've had a tough day. Tomorrow is a fresh start.")
+    print("I'm sorry you've had a tough day. Tomorrow is a fresh start.")  # Empathetic path
 else:
-    print(f"Thanks for sharing, {name}. I appreciate your honesty.")
+    print(f"Thanks for sharing, {name}. I appreciate your honesty.")  # Default path
 
-print("\\nThanks for chatting with me! Have a wonderful rest of your day.")`
+print("\\nThanks for chatting with me! Have a wonderful rest of your day.")  # Farewell`
           }
         ]
       },
@@ -282,7 +305,9 @@ print("Thanks for sharing your favorite color with me!")`,
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `**Step 1: Understand Variables as Storage**
+            content: `Your bot now collects input; let's store that information.
+
+**Step 1: Understand Variables as Storage**
 
 Variables are named containers that store data. Think of them as labeled boxes:
 
@@ -307,36 +332,40 @@ Create variables and observe how they store different types of data.
 
 **Step 4: Modify Variables**
 
-Variables can be updated with new values throughout your program.`,
+Variables can be updated with new values throughout your program.
+
+**Common Errors**
+- Mixing string and number types without conversion
+- Forgetting quotes around string data`,
             codeExample: `# Comprehensive variable example
-print("=== User Profile Bot ===")
+print("=== User Profile Bot ===")  # Program title
 
 # Collect user information
-name = input("Enter your name: ")
-age = int(input("Enter your age: "))
-height = float(input("Enter your height in feet: "))
-is_student = input("Are you a student? (yes/no): ").lower() == "yes"
+name = input("Enter your name: ")  # User name as string
+age = int(input("Enter your age: "))  # Convert to integer
+height = float(input("Enter your height in feet: "))  # Convert to float
+is_student = input("Are you a student? (yes/no): ").lower() == "yes"  # Boolean
 
 # Calculate derived information
-birth_year = 2024 - age
+birth_year = 2024 - age  # Calculate birth year
 height_cm = height * 30.48  # Convert feet to centimeters
 
 # Display profile
-print(f"\\n=== Profile for {name} ===")
-print(f"Age: {age} years old")
-print(f"Birth Year: {birth_year}")
-print(f"Height: {height} feet ({height_cm:.1f} cm)")
-print(f"Student Status: {'Student' if is_student else 'Not a student'}")
+print(f"\\n=== Profile for {name} ===")  # Heading
+print(f"Age: {age} years old")  # Display age
+print(f"Birth Year: {birth_year}")  # Show birth year
+print(f"Height: {height} feet ({height_cm:.1f} cm)")  # Height in both units
+print(f"Student Status: {'Student' if is_student else 'Not a student'}")  # Conditional output
 
 # Demonstrate variable modification
-print(f"\\nNext year, {name} will be {age + 1} years old!")
+print(f"\\nNext year, {name} will be {age + 1} years old!")  # Demonstrate arithmetic
 
 # Show data types
-print(f"\\n=== Data Types ===")
-print(f"name is a {type(name).__name__}")
-print(f"age is a {type(age).__name__}")
-print(f"height is a {type(height).__name__}")
-print(f"is_student is a {type(is_student).__name__}")`
+print(f"\\n=== Data Types ===")  # Show data types
+print(f"name is a {type(name).__name__}")  # str
+print(f"age is a {type(age).__name__}")  # int
+print(f"height is a {type(height).__name__}")  # float
+print(f"is_student is a {type(is_student).__name__}")  # bool`
           }
         ]
       },
@@ -400,7 +429,9 @@ print("\\nNote: BMI is a general indicator. Consult healthcare professionals for
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `**Step 1: Master Multiple Conditions with elif**
+            content: `With variables under your belt, it's time to make decisions.
+
+**Step 1: Master Multiple Conditions with elif**
 
 Use elif to check multiple conditions in sequence:
 
@@ -459,68 +490,72 @@ else:
 
 **Step 4: Build Complex Decision Trees**
 
-Create sophisticated logic that handles multiple scenarios and edge cases.`,
+Create sophisticated logic that handles multiple scenarios and edge cases.
+
+**Common Errors**
+- Misplacing colons or indentation in if/elif blocks
+- Using `=` instead of `==` for comparisons`,
             codeExample: `# Advanced restaurant recommendation bot
-print("=== Restaurant Recommendation Bot ===")
+print("=== Restaurant Recommendation Bot ===")  # Title
 
 # Gather preferences
-cuisine = input("What type of cuisine? (italian/chinese/mexican/american): ").lower()
-budget = input("What's your budget? (low/medium/high): ").lower()
-dietary = input("Any dietary restrictions? (none/vegetarian/vegan/gluten-free): ").lower()
-group_size = int(input("How many people in your group? "))
+cuisine = input("What type of cuisine? (italian/chinese/mexican/american): ").lower()  # Preferred food
+budget = input("What's your budget? (low/medium/high): ").lower()  # Price range
+dietary = input("Any dietary restrictions? (none/vegetarian/vegan/gluten-free): ").lower()  # Dietary needs
+group_size = int(input("How many people in your group? "))  # Number of diners
 
-print("\\n=== Analyzing your preferences... ===")
+print("\\n=== Analyzing your preferences... ===")  # Inform user
 
 # Complex decision logic
-if cuisine == "italian":
+if cuisine == "italian":  # Cuisine branch
     if budget == "high" and group_size <= 4:
-        restaurant = "Bella Vista (upscale Italian)"
+        restaurant = "Bella Vista (upscale Italian)"  # Fancy option
         price_range = "$$$"
     elif budget == "medium":
-        restaurant = "Tony's Pizzeria"
+        restaurant = "Tony's Pizzeria"  # Moderate option
         price_range = "$$"
     else:
-        restaurant = "Little Italy Cafe"
+        restaurant = "Little Italy Cafe"  # Budget option
         price_range = "$"
-elif cuisine == "chinese":
+elif cuisine == "chinese":  # Chinese food branch
     if dietary == "vegan":
-        restaurant = "Green Dragon (vegan Chinese)"
+        restaurant = "Green Dragon (vegan Chinese)"  # Vegan friendly
     elif budget == "high":
-        restaurant = "Golden Palace"
+        restaurant = "Golden Palace"  # Upscale option
         price_range = "$$$"
     else:
-        restaurant = "Panda Express"
+        restaurant = "Panda Express"  # Fast-food fallback
         price_range = "$"
-elif cuisine == "mexican":
+elif cuisine == "mexican":  # Mexican food branch
     if dietary in ["vegetarian", "vegan"] and budget != "low":
-        restaurant = "Verde Mexican Grill"
+        restaurant = "Verde Mexican Grill"  # Veg-friendly option
     elif group_size > 6:
-        restaurant = "Casa Grande (family style)"
+        restaurant = "Casa Grande (family style)"  # Big groups
     else:
-        restaurant = "Taco Bell"
+        restaurant = "Taco Bell"  # Cheap eats
         price_range = "$"
 else:
-    restaurant = "The Local Diner (American classics)"
+    restaurant = "The Local Diner (American classics)"  # Default choice
     price_range = "$$"
 
 # Additional considerations
 if dietary == "gluten-free":
-    print("Note: Please confirm gluten-free options when you call.")
+    print("Note: Please confirm gluten-free options when you call.")  # Warn user
 
 if group_size > 8:
-    print("Recommendation: Call ahead for large group reservations.")
+    print("Recommendation: Call ahead for large group reservations.")  # Large group tip
 
 # Final recommendation
-print(f"\\n=== Recommendation ===")
-print(f"Restaurant: {restaurant}")
+print(f"\\n=== Recommendation ===")  # Show final recommendation
+print(f"Restaurant: {restaurant}")  # Name of place
 if 'price_range' in locals():
-    print(f"Price Range: {price_range}")
-print(f"Perfect for: {group_size} people with {dietary if dietary != 'none' else 'no'} dietary restrictions")
-print(f"Cuisine: {cuisine.title()}")
+    print(f"Price Range: {price_range}")  # Show price if available
+print(f"Perfect for: {group_size} people with {dietary if dietary != 'none' else 'no'} dietary restrictions")  # Recap
+print(f"Cuisine: {cuisine.title()}")  # Echo choice
 
 # Follow-up question
 if input("\\nWould you like directions? (yes/no): ").lower().startswith('y'):
-    print("Great! Check Google Maps or call the restaurant for directions.")`
+    print("Great! Check Google Maps or call the restaurant for directions.")`  # Offer help
           }
         ]
       },
@@ -620,7 +655,9 @@ print("\\nEnjoy your movie! 🍿")`,
         sections: [
           {
             title: 'Tutorial Steps',
-            content: `**Step 1: Understand For Loops**
+            content: `Decisions run once, but bots often repeat work. Loops handle repetition.
+
+**Step 1: Understand For Loops**
 
 For loops repeat code a specific number of times:
 
@@ -679,16 +716,20 @@ for i in range(10):
     if i == 7:
         break     # Exit the loop
     print(i)
-\`\`\``,
-            codeExample: `# Advanced chatbot with conversation loop
-import random
+\`\`\`
 
-print("=== Advanced ChatBot ===")
-print("I can chat, tell jokes, and play games!")
-print("Commands: chat, joke, game, help, quit")
+**Common Errors**
+- Forgetting to update loop variables (infinite loops)
+- Confusing `break` and `continue``,
+            codeExample: `# Advanced chatbot with conversation loop
+import random  # Standard library for randomness
+
+print("=== Advanced ChatBot ===")  # Intro text
+print("I can chat, tell jokes, and play games!")  # Explain features
+print("Commands: chat, joke, game, help, quit")  # User help
 
 # Bot responses for different topics
-chat_responses = [
+chat_responses = [  # Generic replies
     "That's really interesting! Tell me more.",
     "I see what you mean. How does that make you feel?",
     "That's a great point. I hadn't thought of it that way.",
@@ -696,79 +737,79 @@ chat_responses = [
     "That sounds fascinating. What happened next?"
 ]
 
-jokes = [
+jokes = [  # List of jokes
     "Why don't scientists trust atoms? Because they make up everything!",
     "Why did the scarecrow win an award? He was outstanding in his field!",
     "Why don't eggs tell jokes? They'd crack each other up!",
     "What do you call a fake noodle? An impasta!"
 ]
 
-conversation_count = 0
+conversation_count = 0  # Track how many exchanges occur
 
 # Main conversation loop
-while True:
-    user_input = input("\\nYou: ").lower().strip()
+while True:  # Main loop
+    user_input = input("\\nYou: ").lower().strip()  # Normalize input
     
     # Check for exit command
     if user_input in ['quit', 'exit', 'bye']:
-        print(f"Bot: Thanks for chatting! We had {conversation_count} exchanges. Goodbye!")
+        print(f"Bot: Thanks for chatting! We had {conversation_count} exchanges. Goodbye!")  # Exit
         break
     
     # Handle different commands
     elif user_input == 'help':
-        print("Bot: I can respond to: chat, joke, game, help, quit")
+        print("Bot: I can respond to: chat, joke, game, help, quit")  # Show commands
         print("     Or just type anything to have a conversation!")
     
     elif user_input == 'joke':
-        joke = random.choice(jokes)
+        joke = random.choice(jokes)  # Pick a joke
         print(f"Bot: {joke}")
         conversation_count += 1
     
     elif user_input == 'game':
-        print("Bot: Let's play a guessing game! I'm thinking of a number 1-10.")
-        secret_number = random.randint(1, 10)
+        print("Bot: Let's play a guessing game! I'm thinking of a number 1-10.")  # Start game
+        secret_number = random.randint(1, 10)  # Random number
         attempts = 0
         max_attempts = 3
         
         # Nested game loop
-        while attempts < max_attempts:
+        while attempts < max_attempts:  # Nested loop
             try:
-                guess = int(input(f"Guess #{attempts + 1}: "))
+                guess = int(input(f"Guess #{attempts + 1}: "))  # Convert guess
                 attempts += 1
                 
                 if guess == secret_number:
-                    print(f"Bot: Correct! You got it in {attempts} attempts!")
+                    print(f"Bot: Correct! You got it in {attempts} attempts!")  # Success
                     break
                 elif guess < secret_number:
-                    print("Bot: Too low!")
+                    print("Bot: Too low!")  # Hint
                 else:
-                    print("Bot: Too high!")
+                    print("Bot: Too high!")  # Hint
                     
                 if attempts == max_attempts:
-                    print(f"Bot: Game over! The number was {secret_number}")
+                    print(f"Bot: Game over! The number was {secret_number}")  # Out of tries
                     
             except ValueError:
-                print("Bot: Please enter a valid number!")
-                attempts -= 1  # Don't count invalid input as an attempt
+                print("Bot: Please enter a valid number!")  # Validation
+                attempts -= 1  # Don't count invalid input
         
-        conversation_count += 1
+        conversation_count += 1  # Game finished
     
     elif user_input == 'chat':
-        topic = input("What would you like to chat about? ")
+        topic = input("What would you like to chat about? ")  # Ask for topic
         response = random.choice(chat_responses)
-        print(f"Bot: {response}")
+        print(f"Bot: {response}")  # Reply
         conversation_count += 1
     
     else:
         # General conversation
         if len(user_input) > 0:
             response = random.choice(chat_responses)
-            print(f"Bot: {response}")
+            print(f"Bot: {response}")  # Generic reply
             conversation_count += 1
         else:
             print("Bot: I didn't catch that. Type 'help' for commands!")
 
-print("\\nBot session ended. Thanks for using ChatBot!")`
+print("\\nBot session ended. Thanks for using ChatBot!")`  # End message
           }
         ]
       },
@@ -863,7 +904,9 @@ print("\\nRemember: Never share your password with anyone!")`,
         sections: [
           {
             title: 'What Are APIs?',
-            content: `**API stands for Application Programming Interface**
+            content: `Now that loops let your bot run repeatedly, let's pull in external data.
+
+**API stands for Application Programming Interface**
 
 Think of an API as a waiter in a restaurant:
 • You (your program) make a request
@@ -879,15 +922,19 @@ Think of an API as a waiter in a restaurant:
 • **Entertainment APIs**: Movies, music, games information
 
 **Why Use APIs?**
-Instead of building everything from scratch, APIs let you access existing services and data. Want weather information? Use a weather API. Need jokes? Use a joke API.`,
+Instead of building everything from scratch, APIs let you access existing services and data. Want weather information? Use a weather API. Need jokes? Use a joke API.
+
+**Common Errors**
+- Forgetting to check API status codes
+- Parsing JSON without validating the response`,
             codeExample: `# Understanding API concepts with examples
-print("=== API Concepts Demonstration ===")
+print("=== API Concepts Demonstration ===")  # Header
 
 # Simulating an API response (what you'd get from a real API)
 fake_weather_response = {
-    "location": "New York",
-    "temperature": 72,
-    "condition": "Sunny",
+    "location": "New York",  # City name
+    "temperature": 72,       # Degrees Fahrenheit
+    "condition": "Sunny",    # Weather condition
     "humidity": 45,
     "wind_speed": 8
 }
@@ -895,21 +942,21 @@ fake_weather_response = {
 fake_news_response = {
     "articles": [
         {
-            "title": "Python Programming Gains Popularity",
-            "author": "Tech Reporter",
-            "published": "2024-01-15",
+            "title": "Python Programming Gains Popularity",  # Article title
+            "author": "Tech Reporter",  # Author name
+            "published": "2024-01-15",  # Date
             "summary": "Python continues to be the most popular programming language..."
         }
     ]
 }
 
 # Demonstrating how you'd use API data
-print("Weather Information:")
+print("Weather Information:")  # Display weather
 print(f"Location: {fake_weather_response['location']}")
 print(f"Temperature: {fake_weather_response['temperature']}°F")
 print(f"Condition: {fake_weather_response['condition']}")
 
-print("\\nLatest News:")
+print("\\nLatest News:")  # Loop through articles
 for article in fake_news_response['articles']:
     print(f"Title: {article['title']}")
     print(f"By: {article['author']}")
@@ -1057,7 +1104,9 @@ print(parse_user_profile(user_data))`,
         sections: [
           {
             title: 'Making Your First API Call',
-            content: `**Step 1: Install the Requests Library**
+            content: `You've learned what APIs are. Now let's use them in code.
+
+**Step 1: Install the Requests Library**
 
 The requests library makes HTTP calls simple in Python:
 
@@ -1099,16 +1148,20 @@ try:
 except requests.exceptions.RequestException as e:
     print(f"API call failed: {e}")
     return None
-\`\`\``,
-            codeExample: `import requests
-import json
-from datetime import datetime
+\`\`\`
+
+**Common Errors**
+- Missing internet connection
+- Forgetting to handle non-200 status codes`,
+            codeExample: `import requests  # HTTP library
+import json  # JSON handling
+from datetime import datetime  # For timestamps
 
 class APIBot:
     """A bot that demonstrates various API integrations"""
     
     def __init__(self):
-        self.session = requests.Session()
+        self.session = requests.Session()  # Reuse HTTP session
         self.session.headers.update({
             'User-Agent': 'Python-Bot/1.0'
         })
@@ -1116,57 +1169,57 @@ class APIBot:
     def get_random_fact(self):
         """Get a random number fact from Numbers API"""
         try:
-            url = "http://numbersapi.com/random/trivia"
-            response = self.session.get(url, timeout=10)
+            url = "http://numbersapi.com/random/trivia"  # Endpoint
+            response = self.session.get(url, timeout=10)  # Perform request
             
             if response.status_code == 200:
-                return response.text.strip()
+                return response.text.strip()  # Success
             else:
                 return "Sorry, couldn't fetch a fact right now."
                 
         except requests.exceptions.RequestException as e:
-            return f"Error getting fact: {str(e)}"
+            return f"Error getting fact: {str(e)}"  # Handle errors
     
     def get_dad_joke(self):
         """Get a dad joke from icanhazdadjoke API"""
         try:
             url = "https://icanhazdadjoke.com/"
-            headers = {"Accept": "application/json"}
+            headers = {"Accept": "application/json"}  # Request JSON
             
-            response = self.session.get(url, headers=headers, timeout=10)
+            response = self.session.get(url, headers=headers, timeout=10)  # GET request
             
             if response.status_code == 200:
                 joke_data = response.json()
-                return joke_data["joke"]
+                return joke_data["joke"]  # Extract joke
             else:
                 return "Sorry, no jokes available right now."
                 
         except requests.exceptions.RequestException as e:
-            return f"Error getting joke: {str(e)}"
+            return f"Error getting joke: {str(e)}"  # Error case
     
     def get_cat_fact(self):
         """Get a random cat fact"""
         try:
-            url = "https://catfact.ninja/fact"
+            url = "https://catfact.ninja/fact"  # API endpoint
             response = self.session.get(url, timeout=10)
             
             if response.status_code == 200:
                 fact_data = response.json()
-                return fact_data["fact"]
+                return fact_data["fact"]  # Extract fact
             else:
                 return "Sorry, no cat facts available right now."
                 
         except requests.exceptions.RequestException as e:
-            return f"Error getting cat fact: {str(e)}"
+            return f"Error getting cat fact: {str(e)}"  # Error
 
 # Demonstration of the API bot
 def main():
-    print("=== Multi-API Bot Demo ===")
+    print("=== Multi-API Bot Demo ===")  # Greeting
     print("This bot integrates with multiple APIs to provide various content!")
     
-    bot = APIBot()
+    bot = APIBot()  # Create bot instance
     
-    while True:
+    while True:  # Command loop
         print("\\nAvailable commands:")
         print("1. fact - Random number fact")
         print("2. joke - Dad joke")
@@ -1174,24 +1227,24 @@ def main():
         print("4. all - Get one of each")
         print("5. quit - Exit")
         
-        choice = input("\\nWhat would you like? ").lower().strip()
+        choice = input("\\nWhat would you like? ").lower().strip()  # User command
         
         if choice == "quit":
-            print("Thanks for using the API bot! Goodbye!")
+            print("Thanks for using the API bot! Goodbye!")  # Exit
             break
         elif choice == "fact":
-            print(f"\\n🔢 Random Fact: {bot.get_random_fact()}")
+            print(f"\\n🔢 Random Fact: {bot.get_random_fact()}")  # Show fact
         elif choice == "joke":
-            print(f"\\n😄 Dad Joke: {bot.get_dad_joke()}")
+            print(f"\\n😄 Dad Joke: {bot.get_dad_joke()}")  # Show joke
         elif choice == "cat":
-            print(f"\\n🐱 Cat Fact: {bot.get_cat_fact()}")
+            print(f"\\n🐱 Cat Fact: {bot.get_cat_fact()}")  # Show cat fact
         elif choice == "all":
             print("\\n🎉 Here's a variety pack!")
-            print(f"\\n🔢 Fact: {bot.get_random_fact()}")
-            print(f"\\n😄 Joke: {bot.get_dad_joke()}")
-            print(f"\\n🐱 Cat Fact: {bot.get_cat_fact()}")
+            print(f"\\n🔢 Fact: {bot.get_random_fact()}")  # Fact
+            print(f"\\n😄 Joke: {bot.get_dad_joke()}")  # Joke
+            print(f"\\n🐱 Cat Fact: {bot.get_cat_fact()}")  # Cat fact
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Please try again.")  # Unknown command
 
 if __name__ == "__main__":
     main()`
@@ -1313,7 +1366,9 @@ if __name__ == "__main__":
         sections: [
           {
             title: 'Planning Your Bot',
-            content: `**Step 1: Define Your Bot's Purpose**
+            content: `All previous lessons come together here as you craft a personalized assistant.
+
+**Step 1: Define Your Bot's Purpose**
 
 Before coding, plan your bot's identity:
 • **Purpose**: What problem does it solve? (entertainment, productivity, information, etc.)
@@ -1344,18 +1399,22 @@ Make your bot memorable with:
 • Consistent tone and voice
 • Helpful error messages
 • Encouraging feedback
-• Personal touches that reflect your creativity`,
+• Personal touches that reflect your creativity
+
+**Common Errors**
+- Adding too many features at once
+- Forgetting to save conversation history`,
             codeExample: `# Example: Personal Assistant Bot Framework
-import requests
-import random
-from datetime import datetime
+import requests  # For API calls
+import random    # Random responses
+from datetime import datetime  # Time handling
 
 class PersonalAssistantBot:
     def __init__(self, name="Assistant"):
-        self.name = name
-        self.user_name = ""
-        self.conversation_history = []
-        self.session = requests.Session()
+        self.name = name  # Bot's name
+        self.user_name = ""  # Will store user's name
+        self.conversation_history = []  # Keep chat history
+        self.session = requests.Session()  # For future API calls
         
         # Personality traits
         self.greetings = [
@@ -1373,10 +1432,10 @@ class PersonalAssistantBot:
     
     def greet_user(self):
         """Initial greeting and setup"""
-        print(random.choice(self.greetings))
+        print(random.choice(self.greetings))  # Random greeting
         
         if not self.user_name:
-            self.user_name = input("What's your name? ").strip()
+            self.user_name = input("What's your name? ").strip()  # Ask name
             print(f"Nice to meet you, {self.user_name}! 😊")
             
         print(f"\\nI can help you with various tasks, {self.user_name}.")
