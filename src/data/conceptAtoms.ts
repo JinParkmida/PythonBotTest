@@ -426,7 +426,7 @@ else:
           },
           {
             title: 'Quick Tasks',
-            content: `1. Write a short script that prints \"small\" if a number is less than 5 and \"big\" otherwise.\n2. Experiment with .lower() by typing YES, Yes, and yes.\nThese tasks build on variables and prepare you for using loops next.`
+            content: `1. Write a short script that prints "small" if a number is less than 5 and "big" otherwise.\n2. Experiment with .lower() by typing YES, Yes, and yes.\nThese tasks build on variables and prepare you for using loops next.`
           }
         ]
       },
@@ -1050,7 +1050,7 @@ while True:
           },
           {
             title: 'Quick Tasks',
-            content: `1. Brainstorm three features you\'d like your final bot to have.\n2. Add a list of random greetings to your existing bot and choose one with random.choice().\nThese tasks reinforce everything so far and set you up for the final challenge.`
+            content: `1. Brainstorm three features you'd like your final bot to have.\n2. Add a list of random greetings to your existing bot and choose one with random.choice().\nThese tasks reinforce everything so far and set you up for the final challenge.`
           }
         ]
       },
@@ -1336,11 +1336,10 @@ while True:
 - Connect to Discord or Telegram to make your bot available to friends
 
 **But for now:** Focus on the challenge! You have everything you need to create something amazing. The world needs more creative, helpful bots - and you're about to build one! 💪`
-          }
-          ],
+          },
           {
             title: 'Quick Tasks',
-            content: `1. Review each bot you built and note one improvement for each.\n2. List the features you want in your challenge bot.\nThese reflections reinforce what you\'ve learned and focus you on the upcoming project.`
+            content: `1. Review each bot you built and note one improvement for each.\n2. List the features you want in your challenge bot.\nThese reflections reinforce what you've learned and focus you on the upcoming project.`
           }
         ]
       },
