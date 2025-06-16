@@ -33,6 +33,10 @@ print("Hello, Bot Builder!")
 **This is the core loop:** Write code → Run code → See result. You'll do this a lot, and it never gets old!
 
 **Pro Tip:** If you see any red text (errors), don't panic! Errors are just your computer's way of saying "I didn't understand that." We'll learn to read them like friendly hints.`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Create a free Replit account and open a new Python repl.\n2. Run the sample print code and watch the terminal for output.\nThese tasks reinforce your setup and prepare you for understanding what a bot is next.`
           }
         ]
       },
@@ -46,6 +50,16 @@ print("Hello, Bot Builder!")
               'Replace the text inside the quotes with your new message',
               'Make sure to keep the quotes around your text',
               'Click Run to see your message appear!'
+            ]
+          },
+          {
+            type: 'quiz',
+            question: 'Where does the program output appear when you click Run?',
+            options: ['In the terminal/console', 'On a separate website', 'In the code editor', 'Nowhere'],
+            solution: 'In the terminal/console',
+            hints: [
+              'Look at the panel where "Hello, Bot Builder!" showed up',
+              'It appears to the right of your code editor'
             ]
           }
         ]
@@ -88,6 +102,24 @@ That's it! No magic, no super-intelligence required.`
             content: `And what's an 'API'? Imagine your bot wants to tell a joke. Does it make up the joke itself? No! It calls a 'Joke Service' (that's the API!) and asks for one. The Joke Service sends it back, and your bot tells you.
 
 It's like having access to a huge library of information that your bot can 'read' from. Instead of your bot going outside to check the weather, it asks a special 'weather service' for the information!`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Think of two everyday examples of bots or automated helpers.\n2. Note what input they take and what output they give you.\nThese questions reinforce the listen-think-talk idea and get you ready to code your first bot.`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'quiz',
+            question: 'Which step is NOT part of a simple bot?',
+            options: ['Listen', 'Think', 'Sleep', 'Talk'],
+            solution: 'Sleep',
+            hints: [
+              'A bot processes information and responds.',
+              'One option here doesn\'t involve interaction.'
+            ]
           }
         ]
       }
@@ -143,6 +175,10 @@ print("Thanks for chatting with me!")`
             title: 'Common Input Mistakes',
             content: `Users don't always type what you expect. If you ask for a number and they type words, Python raises a \`ValueError\`. Wrap number conversions in a \`try/except\` block so your bot can respond nicely instead of crashing.`,
             codeExample: `try:\n    user_age = int(input("How old are you? "))\nexcept ValueError:\n    print("Please enter a number, not words!")`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Modify the hello bot so it asks for your name and greets you.\n2. Answer the pizza question with unexpected words to see how the bot reacts.\nThese small experiments reinforce input handling and prepare you to store data in variables next.`
           }
         ]
       },
@@ -174,6 +210,16 @@ else:
               'The else will catch "no" and anything else they type',
               'Try typing "YES" or "Yes" - what happens? (We\'ll fix this later!)',
               'Use try/except around int() if you ever ask for numbers'
+            ]
+          },
+          {
+            type: 'code',
+            question: 'Update the pizza bot to respond to "maybe" with a friendly message in addition to yes or no.',
+            solution: `pizza_answer = input("Do you like pizza? (yes/no/maybe) ")\nif pizza_answer == "yes":\n    print("Pizza is amazing! What's your favorite topping?")\nelif pizza_answer == "maybe":\n    print("It's hard to decide! Maybe try a new flavor.")\nelse:\n    print("That's okay, everyone has different tastes!")`,
+            hints: [
+              'Add an elif branch that checks for "maybe"',
+              'Remember to compare the input exactly',
+              'Keep the existing else for all other answers'
             ]
           }
         ]
@@ -253,6 +299,10 @@ print("New score: " + str(score))`
             title: 'Beware of Bad Input',
             content: `When you turn the result of \`input()\` into a number, users might type something that isn't numeric. This triggers a \`ValueError\`. Use \`try/except\` so your bot can explain the problem instead of crashing.`,
             codeExample: `try:\n    age = int(input("How old are you? "))\nexcept ValueError:\n    print("Oops! Please enter a numeric age.")`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Create variables for your favorite movie and rating.\n2. Use type() on a number and a string to see their types.\nThese tasks strengthen your understanding of variables and get you ready for using them in choices.`
           }
         ]
       },
@@ -274,6 +324,16 @@ print("You were born in " + str(birth_year))`,
               'Calculate birth year by subtracting age from current year (2024)',
               'Use str() to convert the birth year back to text for printing',
               'Wrap the int() call in try/except to handle bad input'
+            ]
+          },
+          {
+            type: 'quiz',
+            question: 'Which variable type stores True or False values?',
+            options: ['string', 'integer', 'boolean', 'float'],
+            solution: 'boolean',
+            hints: [
+              'Booleans are often used with if statements',
+              'They represent yes or no answers'
             ]
           }
         ]
@@ -363,6 +423,10 @@ else:
             title: 'Troubleshooting User Choices',
             content: `Sometimes users type letters when you expect numbers or give unexpected answers. Wrap number conversions in \`try/except\` and provide friendly error messages when their input doesn't match what you expect.`,
             codeExample: `try:\n    choice = int(input("Pick a number 1-3: "))\nexcept ValueError:\n    print("Numbers only! Try again.")`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Write a short script that prints \"small\" if a number is less than 5 and \"big\" otherwise.\n2. Experiment with .lower() by typing YES, Yes, and yes.\nThese tasks build on variables and prepare you for using loops next.`
           }
         ]
       },
@@ -413,6 +477,17 @@ else:
               'Use if/elif/else to give different responses',
               'The \\n in the print makes a blank line for better formatting',
               'Wrap the number input in try/except to catch non-numbers'
+            ]
+          }
+          ,
+          {
+            type: 'quiz',
+            question: 'Which keyword lets your bot check another condition after an if?',
+            options: ['elif', 'else', 'loop', 'func'],
+            solution: 'elif',
+            hints: [
+              'It is short for "else if"',
+              'You use it between if and else blocks'
             ]
           }
         ]
@@ -520,6 +595,10 @@ while True:
             title: 'Avoiding Infinite Loops',
             content: `If your loop expects a number and someone types text, Python throws a \`ValueError\` and the loop stops. Use \`try/except\` inside the loop to catch mistakes and continue asking.`,
             codeExample: `while True:\n    try:\n        guess = int(input("Your guess: "))\n    except ValueError:\n        print("That's not a number!")\n        continue\n    # continue with your checks...`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Use a for loop to print numbers 1-5.\n2. Write a while loop that keeps asking for a word until the user types 'stop'.\nThese tasks reinforce looping basics and prepare you to call APIs repeatedly later.`
           }
         ]
       },
@@ -576,6 +655,16 @@ print("Thanks for playing!")`,
               'Compare their guess to your secret number',
               'Use break to stop the loop when they guess correctly',
               'Add try/except around int(input()) to catch bad guesses'
+            ]
+          },
+          {
+            type: 'quiz',
+            question: 'Which loop is best when you do NOT know how many times you will repeat?',
+            options: ['for loop', 'while loop', 'both', 'neither'],
+            solution: 'while loop',
+            hints: [
+              'A for loop uses a fixed range',
+              'The other loop keeps going until a condition changes'
             ]
           }
         ]
@@ -693,6 +782,10 @@ while True:
             title: 'Handling API Errors',
             content: `APIs sometimes fail or your internet connection might drop. When \`requests.get\` can't reach the server, it raises an exception. Check the status code and wrap the call in \`try/except\` so your bot can display a friendly message instead of crashing.`,
             codeExample: `def safe_joke():\n    try:\n        r = requests.get("https://icanhazdadjoke.com/", headers={"Accept": "application/json"})\n        if r.status_code == 200:\n            return r.json()["joke"]\n        return "API returned an error."\n    except requests.exceptions.RequestException:\n        return "Network error. Try again later."`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Run the get_dad_joke() function and print the result.\n2. Change the URL to https://catfact.ninja/fact to fetch a cat fact.\nThese tasks build on loops and prepare you for customizing your own bot.`
           }
         ]
       },
@@ -766,6 +859,16 @@ while True:
               'Change the prompts to ask for "fact" instead of "joke"',
               'The structure is very similar to the joke bot',
               'Use try/except around the API call to handle network errors'
+            ]
+          },
+          {
+            type: 'quiz',
+            question: 'Which Python library do we use to make HTTP requests in this lesson?',
+            options: ['requests', 'flask', 'numpy', 'replit'],
+            solution: 'requests',
+            hints: [
+              'It is installed with pip and imported at the top',
+              'This library lets your bot talk to websites'
             ]
           }
         ]
@@ -944,6 +1047,10 @@ while True:
         print(random.choice(responses))
     else:
         print(f"Just type 'chat' to talk with me, {user_name}, or 'quit' to leave!")`
+          },
+          {
+            title: 'Quick Tasks',
+            content: `1. Brainstorm three features you\'d like your final bot to have.\n2. Add a list of random greetings to your existing bot and choose one with random.choice().\nThese tasks reinforce everything so far and set you up for the final challenge.`
           }
         ]
       },
@@ -1092,6 +1199,16 @@ while True:
               'Give different advice based on the type of mood',
               'Remember their name and use it throughout the conversation'
             ]
+          },
+          {
+            type: 'quiz',
+            question: 'Why do we use random.choice() in our bot?',
+            options: ['To pick a random response', 'To connect to an API', 'To store user input', 'To check conditions'],
+            solution: 'To pick a random response',
+            hints: [
+              'It helps vary the bot\'s replies',
+              'Used with a list of possible messages'
+            ]
           }
         ]
       }
@@ -1219,6 +1336,25 @@ while True:
 - Connect to Discord or Telegram to make your bot available to friends
 
 **But for now:** Focus on the challenge! You have everything you need to create something amazing. The world needs more creative, helpful bots - and you're about to build one! 💪`
+          }
+          ],
+          {
+            title: 'Quick Tasks',
+            content: `1. Review each bot you built and note one improvement for each.\n2. List the features you want in your challenge bot.\nThese reflections reinforce what you\'ve learned and focus you on the upcoming project.`
+          }
+        ]
+      },
+      interactive: {
+        challenges: [
+          {
+            type: 'quiz',
+            question: 'What should you focus on first when starting the challenge bot?',
+            options: ['Set up one main feature', 'Add every API you can find', 'Write complex algorithms immediately', 'Skip testing and hope for the best'],
+            solution: 'Set up one main feature',
+            hints: [
+              'Start small and build gradually',
+              'Testing early helps prevent bugs'
+            ]
           }
         ]
       }
